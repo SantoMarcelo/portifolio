@@ -50,8 +50,6 @@ export const SEED_PRODUCTS: SeedProduct[] = [
   ['CAS-008', 'Produto Descontinuado', 'Produto inativo (não aparece na vitrine)', 10, 'Casa', 10, false],
 ];
 
-const PLACEHOLDER_IMAGE = '/images/placeholder.svg';
-
 /** Cria/restaura usuários e produtos iniciais (idempotente: upsert por e-mail e SKU). */
 export async function seedDatabase(prisma: PrismaClient) {
   for (const u of SEED_USERS) {
@@ -64,7 +62,7 @@ export async function seedDatabase(prisma: PrismaClient) {
   }
 
   for (const [sku, name, description, price, category, stock, active = true] of SEED_PRODUCTS) {
-    const data = { name, description, price, category, stock, active, imageUrl: PLACEHOLDER_IMAGE };
+    const data = { name, description, price, category, stock, active, imageUrl: `/images/products/${sku}-1.jpg` };
     await prisma.product.upsert({ where: { sku }, update: data, create: { sku, ...data } });
   }
 }
