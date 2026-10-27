@@ -81,7 +81,7 @@ Scripts do frontend: `dev`, `build`, `preview`.
 | `ADMIN`    | `admin@loja.com`   | `Admin@123`   |
 | `CUSTOMER` | `cliente@loja.com` | `Cliente@123` |
 
-Qualquer pessoa pode se cadastrar (sempre como `CUSTOMER`). Senha: 8 a 72 caracteres.
+Qualquer pessoa pode se cadastrar (sempre como `CUSTOMER`). Senha: 8 a 72 caracteres, também validada no login (fora da faixa → `400 VALIDATION_ERROR`).
 
 ### Cartões (pagamento simulado, decidido pelos **4 últimos dígitos**)
 
@@ -146,7 +146,7 @@ Mapeamento de IDs: `ELE-001..007` = 1–7, `LIV-001..007` = 8–14, `ROU-001..00
 **Carrinho (CUSTOMER)**
 - Persistido no backend por usuário. Adicionar produto que já está no carrinho **soma** a quantidade.
 - A quantidade total não pode exceder o estoque (`OUT_OF_STOCK` se estoque 0, `INSUFFICIENT_STOCK` se excede).
-- O total é calculado no backend. O header mostra o contador de itens (soma das quantidades).
+- Cada item guarda o preço de quando foi adicionado/atualizado; se o preço do produto mudar, a linha traz `priceChanged: true` (carrinho e cotação trazem `hasPriceChanges`) e a UI exibe aviso. O total é calculado no backend. O header mostra o contador de itens (soma das quantidades).
 
 **Checkout e pedidos**
 - Fluxo: revisão do carrinho → endereço → pagamento → confirmação.
@@ -156,7 +156,8 @@ Mapeamento de IDs: `ELE-001..007` = 1–7, `LIV-001..007` = 8–14, `ROU-001..00
 - Pagamento aprovado: pedido `PAID`, baixa de estoque **atômica** (transação) e carrinho limpo. Se algum item não tiver
   estoque suficiente, o pedido inteiro falha com `409 OUT_OF_STOCK` (os itens problemáticos vêm em `details`) e **nada** é
   alterado nem criado.
-- Pagamento recusado/indisponível: pedido `PAYMENT_FAILED` (o id vem em `error.details[0].orderId`), estoque e carrinho intactos.
+- A disponibilidade de estoque é checada **antes** do pagamento (e também na cotação): item sem estoque → `409 OUT_OF_STOCK`, sem criar pedido, mesmo com cartão `1111`/`2222`.
+- Pagamento recusado/indisponível (com estoque ok): pedido `PAYMENT_FAILED` (o id vem em `error.details[0].orderId`), estoque e carrinho intactos.
 - Cancelamento: somente pedidos `PAID`, pelo dono ou por um `ADMIN`; devolve o estoque (movimentação `ENTRY`).
   Outros status → `409 INVALID_ORDER_STATE`. Pedido de outro cliente → `404 ORDER_NOT_FOUND`.
 - Status: `PENDING`, `PAID`, `PAYMENT_FAILED`, `CANCELLED`. **`PENDING` existe no modelo, mas nenhum fluxo o produz hoje**
@@ -252,7 +253,7 @@ Os códigos são **estáveis**: o `code` é o contrato; a `message` pode mudar.
 | 404 | `ROUTE_NOT_FOUND` | Rota inexistente |
 | 409 | `EMAIL_ALREADY_EXISTS` | Cadastro com e-mail já usado |
 | 409 | `SKU_ALREADY_EXISTS` | SKU duplicado ao criar/editar produto |
-| 409 | `OUT_OF_STOCK` | Carrinho: produto com estoque 0. Pedido: algum item sem estoque suficiente |
+| 409 | `OUT_OF_STOCK` | Carrinho: produto com estoque 0. Cotação/pedido: algum item sem estoque suficiente ou inativo |
 | 409 | `INSUFFICIENT_STOCK` | Quantidade acima do estoque (carrinho) ou saída/ajuste que deixaria o estoque negativo |
 | 409 | `STOCK_CONFLICT` | Estoque alterado por outra operação durante a transação (tente novamente) |
 | 409 | `INVALID_ORDER_STATE` | Cancelamento de pedido que não está `PAID` |
