@@ -1,0 +1,112 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// SQLite não suporta enums: role/type/status são String validadas pela aplicação (ver src/constants.ts)
+
+model User {
+  id           Int             @id @default(autoincrement())
+  name         String
+  email        String          @unique
+  passwordHash String
+  role         String          @default("CUSTOMER") // ADMIN | CUSTOMER
+  createdAt    DateTime        @default(now())
+  cart         Cart?
+  orders       Order[]
+  movements    StockMovement[]
+}
+
+model Product {
+  id          Int             @id @default(autoincrement())
+  name        String
+  description String          @default("")
+  price       Float
+  sku         String          @unique
+  category    String
+  imageUrl    String          @default("")
+  stock       Int             @default(0)
+  active      Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  movements   StockMovement[]
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+
+  @@index([category])
+  @@index([active])
+}
+
+model StockMovement {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  type      String // ENTRY | EXIT | ADJUSTMENT
+  quantity  Int // ENTRY/EXIT: quantidade movimentada; ADJUSTMENT: novo estoque absoluto
+  reason    String
+  userId    Int
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([productId])
+}
+
+model Cart {
+  id     Int        @id @default(autoincrement())
+  userId Int        @unique
+  user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items  CartItem[]
+}
+
+model CartItem {
+  id        Int     @id @default(autoincrement())
+  cartId    Int
+  productId Int
+  quantity  Int
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@unique([cartId, productId])
+}
+
+model Order {
+  id            Int         @id @default(autoincrement())
+  userId        Int
+  status        String      @default("PENDING") // PENDING | PAID | PAYMENT_FAILED | CANCELLED
+  subtotal      Float
+  discount      Float       @default(0)
+  shipping      Float       @default(0)
+  total         Float
+  couponCode    String?
+  paymentMethod String // CREDIT_CARD | PIX | BOLETO
+  cardLast4     String?
+  addressStreet     String
+  addressNumber     String
+  addressComplement String?
+  addressDistrict   String
+  addressCity       String
+  addressState      String
+  addressZip        String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  user          User        @relation(fields: [userId], references: [id])
+  items         OrderItem[]
+
+  @@index([userId])
+  @@index([status])
+}
+
+model OrderItem {
+  id        Int     @id @default(autoincrement())
+  orderId   Int
+  productId Int
+  name      String // snapshot
+  price     Float // snapshot
+  quantity  Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
+}
