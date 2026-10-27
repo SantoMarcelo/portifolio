@@ -13,6 +13,20 @@ export function assertQuantityAvailable(stock: number, desired: number, inCart =
   }
 }
 
+export interface StockProblem {
+  productId: number;
+  name: string;
+  available: number;
+  requested: number;
+}
+
+/** Regra pura: lista os itens do carrinho que não podem ser atendidos (produto inativo ou estoque < quantidade). */
+export function findStockProblems(items: { productId: number; name: string; quantity: number; stock: number; available: boolean }[]) {
+  return items
+    .filter((i) => !i.available)
+    .map((i) => ({ productId: i.productId, name: i.name, available: Math.max(i.stock, 0), requested: i.quantity }));
+}
+
 async function getOrCreateCart(userId: number) {
   return prisma.cart.upsert({ where: { userId }, update: {}, create: { userId } });
 }
@@ -36,6 +50,10 @@ export async function getCart(userId: number) {
     stock: i.product.stock,
     // false se o produto foi desativado ou o estoque caiu abaixo da quantidade no carrinho
     available: i.product.active && i.product.stock >= i.quantity,
+    // preço no momento em que o item foi adicionado/atualizado (null em itens antigos)
+    priceWhenAdded: i.priceWhenAdded,
+    // true se o preço atual difere do preço visto pelo cliente ao adicionar/atualizar o item
+    priceChanged: i.priceWhenAdded !== null && i.priceWhenAdded !== i.product.price,
   }));
 
   return {
@@ -43,6 +61,7 @@ export async function getCart(userId: number) {
     items: lines,
     totalItems: lines.reduce((sum, l) => sum + l.quantity, 0),
     total: round2(lines.reduce((sum, l) => sum + l.subtotal, 0)),
+    hasPriceChanges: lines.some((l) => l.priceChanged),
   };
 }
 
@@ -64,8 +83,8 @@ export async function addItem(userId: number, input: AddItemInput) {
 
   await prisma.cartItem.upsert({
     where: { cartId_productId: { cartId: cart.id, productId: product.id } },
-    update: { quantity: inCart + input.quantity },
-    create: { cartId: cart.id, productId: product.id, quantity: input.quantity },
+    update: { quantity: inCart + input.quantity, priceWhenAdded: product.price },
+    create: { cartId: cart.id, productId: product.id, quantity: input.quantity, priceWhenAdded: product.price },
   });
   return getCart(userId);
 }
@@ -85,7 +104,7 @@ export async function updateItem(userId: number, productId: number, quantity: nu
   const item = await findCartItem(userId, productId);
   if (!item.product.active) throw AppError.notFound('Produto não encontrado', 'PRODUCT_NOT_FOUND');
   assertQuantityAvailable(item.product.stock, quantity, item.quantity);
-  await prisma.cartItem.update({ where: { id: item.id }, data: { quantity } });
+  await prisma.cartItem.update({ where: { id: item.id }, data: { quantity, priceWhenAdded: item.product.price } });
   return getCart(userId);
 }
 

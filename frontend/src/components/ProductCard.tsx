@@ -28,6 +28,11 @@ export function ProductCard({ product: p }: { product: Product }) {
           <span data-testid={`product-name-${p.id}`}>{p.name}</span>
         </Link>
       </h3>
+      {p.description && (
+        <p className="desc" data-testid={`product-description-${p.id}`}>
+          {p.description}
+        </p>
+      )}
       <div className="actions">
         <span className="price" data-testid={`product-price-${p.id}`}>
           {brl(p.price)}

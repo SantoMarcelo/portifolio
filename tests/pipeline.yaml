@@ -1,0 +1,89 @@
+schemaVersion: 2.0
+
+timeout: 60
+
+# CI pipeline for the API automation project.
+# Runs automatically on push to main (default env=dev); can be triggered
+# manually for a specific environment via the `env` parameter (dev | qa | uat).
+# Runs the functional suite via `npm run test:functional` (contract tests excluded).
+
+### Global settings for all builds ###
+machine:
+    baseImage: cypress/base:22.15.0 # Node 22.15.0 (matches .nvmrc); we only need Node + npm
+
+reports:
+    # The project emits only the Jest HTML report (reports/test-report.html);
+    # there is no JUnit XML, so we just collect reports/** as logs/artifacts.
+    junit: false
+    logs:
+        paths:
+          - '**/reports/**/*.*'
+
+notify:
+    slack:
+        enabled: false
+    pullRequestComment:
+        postOnSuccess: false
+        postOnFailure: false
+
+# These secrets must be registered in the RIO vault before a green run.
+# IMPORTANT: with the freestyle template, RIO writes each secret as a FILE under
+# $BUILD_SECRETS_PATH (/secrets/<NAME>), NOT as an env var. The build step below
+# turns the plain (non-cert) secrets into a .env so process.env works at runtime
+# (src/config/config.ts uses dotenv). The cert secrets (CERT_*) are PEM text and
+# are copied straight to Certs/ instead — they must NOT go into the .env.
+secrets:
+    names:
+      # General config (read by src/config/config.ts) — see .env.example for the full list.
+      # NOTE: BASE_URL is set per-env by scripts/rio-setup.sh
+      - AUTH_APP_ID
+      - AUTH_LOGIN_ENDPOINT
+      - AUTH_OAUTH_TOKEN_ENDPOINT
+      - AUTH_OAUTH_AUTHCODE_ENDPOINT
+      - AUTH_CLIENT_ID
+      - AUTH_CLIENT_SECRET
+      - AUTH_GRANT_TYPE
+      # Test users (one block per account registered in src/global-setup.ts)
+      - DEFAULT_USER_ID
+      - DEFAULT_USER_USERNAME
+      - DEFAULT_USER_PASSWORD
+      - DEFAULT_USER_SECRETKEY
+      - ADMIN_USER_ID
+      - ADMIN_USER_USERNAME
+      - ADMIN_USER_PASSWORD
+      - ADMIN_USER_SECRETKEY
+      # Optional mTLS certs — remove if the API does not need client certificates
+      # (scripts/rio-setup.sh skips them when absent)
+      # - CERT_KEY_PEM
+      # - CERT_CERT_PEM
+      # - CERT_CA_1
+      # - CERT_CA_2
+
+pipelines:
+  ###
+  # API tests — runs on every push to main (env=dev by default). Can also be
+  # launched manually against any branch via the BRANCH parameter.
+  # Not PR-gated: many serial suites hit a shared dev environment,
+  # a poor fit for per-PR runs. If PR builds are added later, first set branch
+  # allow-lists on the vault secrets (currently open to any branch).
+  - group: api-tests
+    branchName: main
+    trigger:
+        gitPush: true
+    build:
+        template: freestyle:v4:build
+        buildParameters:
+          - parameter: BRANCH
+            description: 'Optional: branch to check out and test (e.g. task/123-foo). Empty = the checked-out revision (main on push-triggered runs).'
+            defaultValue: ''
+          - parameter: env
+            description: 'Environment: dev | qa | uat'
+            defaultValue: dev
+        steps:
+          # Optional branch override — no-op when BRANCH is empty.
+          - ./scripts/checkout-branch.sh "${BUILD_PARAM_BRANCH}"
+          - npm install
+          # Selects env-specific URLs, materializes the mTLS certs into Certs/ and
+          # builds the .env from the vault secrets mounted under $BUILD_SECRETS_PATH.
+          - ./scripts/rio-setup.sh "${BUILD_PARAM_ENV}"
+          - npm run test:functional

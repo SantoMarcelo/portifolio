@@ -51,6 +51,8 @@ export interface CartItem {
   subtotal: number
   stock: number
   available: boolean
+  priceWhenAdded: number | null
+  priceChanged: boolean
 }
 
 export interface Cart {
@@ -58,11 +60,13 @@ export interface Cart {
   items: CartItem[]
   totalItems: number
   total: number
+  hasPriceChanges: boolean
 }
 
 export interface Quote {
   items: CartItem[]
   totalItems: number
+  hasPriceChanges: boolean
   subtotal: number
   discount: number
   shipping: number

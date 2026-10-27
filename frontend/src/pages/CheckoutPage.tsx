@@ -139,7 +139,20 @@ export default function CheckoutPage() {
       </div>
     )
   }
-  if (!quote) return <ErrorBox error={quoteError} testId="checkout-error" />
+  if (!quote) {
+    return (
+      <div>
+        <ErrorBox error={quoteError} testId="checkout-error" />
+        {quoteError?.code === 'OUT_OF_STOCK' && (
+          <p>
+            <Link to="/cart" data-testid="checkout-unavailable-cart-link">
+              Ajustar o carrinho
+            </Link>
+          </p>
+        )}
+      </div>
+    )
+  }
 
   const failedOrderId = (submitError?.details?.[0] as { orderId?: number } | undefined)?.orderId
   const hasUnavailable = quote.items.some((i) => !i.available)
@@ -215,6 +228,16 @@ export default function CheckoutPage() {
           </div>
           <ErrorBox error={couponError} testId="checkout-coupon-error" />
           <Summary quote={quote} />
+          {quote.items.some((i) => i.priceChanged) && (
+            <p className="alert alert-error" role="alert" data-testid="checkout-price-changed-warning">
+              O preço de alguns itens mudou desde que foram adicionados ao carrinho:{' '}
+              {quote.items
+                .filter((i) => i.priceChanged)
+                .map((i) => `${i.name} (era ${brl(i.priceWhenAdded ?? i.unitPrice)}, agora ${brl(i.unitPrice)})`)
+                .join('; ')}
+              .
+            </p>
+          )}
           {hasUnavailable && (
             <p className="alert alert-error" data-testid="checkout-unavailable-warning">
               Há itens indisponíveis. Ajuste o <Link to="/cart">carrinho</Link>.

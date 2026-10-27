@@ -47,6 +47,7 @@ export const orderSchemas = {
     properties: {
       items: { type: 'array', items: { type: 'object' } },
       totalItems: { type: 'integer' },
+      hasPriceChanges: { type: 'boolean', description: 'true se algum item teve o preço alterado desde que foi adicionado ao carrinho' },
       subtotal: { type: 'number' },
       discount: { type: 'number' },
       shipping: { type: 'number' },

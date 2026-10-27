@@ -3,7 +3,7 @@ import type { Role } from '../../constants';
 import { prisma } from '../../prisma/client';
 import { AppError } from '../../utils/app-error';
 import { pageResult, paginate } from '../../utils/pagination';
-import { getCart } from '../cart/cart.service';
+import { findStockProblems, getCart } from '../cart/cart.service';
 import { processPayment } from '../payments/payments.service';
 import { changeStock } from '../stock/stock.service';
 import type { CreateOrderInput, ListOrdersQuery } from './orders.schema';
@@ -46,11 +46,25 @@ export function toOrderDto(o: OrderWithRelations, includeUser = false) {
   };
 }
 
+/** Falha com 409 OUT_OF_STOCK (details = itens problemáticos) se algum item do carrinho não puder ser atendido. */
+function assertCartAvailable(items: Parameters<typeof findStockProblems>[0]) {
+  const problems = findStockProblems(items);
+  if (problems.length > 0) {
+    throw AppError.conflict('OUT_OF_STOCK', `Estoque insuficiente para: ${problems.map((p) => p.name).join(', ')}`, problems);
+  }
+}
+
 /** Revisão do checkout: cálculo de subtotal, desconto, frete e total sem criar pedido. */
 export async function quote(userId: number, couponCode?: string) {
   const cart = await getCart(userId);
   if (cart.items.length === 0) throw AppError.unprocessable('CART_EMPTY', 'O carrinho está vazio');
-  return { items: cart.items, totalItems: cart.totalItems, ...calculateTotals(cart.total, couponCode) };
+  assertCartAvailable(cart.items);
+  return {
+    items: cart.items,
+    totalItems: cart.totalItems,
+    hasPriceChanges: cart.hasPriceChanges,
+    ...calculateTotals(cart.total, couponCode),
+  };
 }
 
 export async function createOrder(userId: number, input: CreateOrderInput) {
@@ -58,6 +72,8 @@ export async function createOrder(userId: number, input: CreateOrderInput) {
   if (cart.items.length === 0) throw AppError.unprocessable('CART_EMPTY', 'O carrinho está vazio');
 
   const totals = calculateTotals(cart.total, input.couponCode);
+  // Antes do pagamento: nenhum pedido (nem PAYMENT_FAILED) é criado para itens sem estoque
+  assertCartAvailable(cart.items);
   const payment = processPayment(input.payment);
   const { address } = input;
 

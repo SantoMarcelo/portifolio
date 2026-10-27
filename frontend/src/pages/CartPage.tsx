@@ -65,7 +65,16 @@ export default function CartPage() {
                   </div>
                 )}
               </td>
-              <td data-testid={`cart-item-price-${i.productId}`}>{brl(i.unitPrice)}</td>
+              <td data-testid={`cart-item-price-${i.productId}`}>
+                {brl(i.unitPrice)}
+                {i.priceChanged && i.priceWhenAdded !== null && (
+                  <div>
+                    <span className="badge" data-testid={`cart-item-price-changed-${i.productId}`}>
+                      Preço alterado (era {brl(i.priceWhenAdded)})
+                    </span>
+                  </div>
+                )}
+              </td>
               <td>
                 <span className="qty" role="group" aria-label={`Quantidade de ${i.name}`}>
                   <button

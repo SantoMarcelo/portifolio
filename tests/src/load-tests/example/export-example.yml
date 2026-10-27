@@ -1,0 +1,19 @@
+# Artillery load test — example export
+# npx artillery run src/load-tests/example/export-example.yml
+
+config:
+  target: 'http://placeholder'   # actual base URL resolved inside ExampleApi via config.baseURL
+  processor: './example.processor.ts'
+  phases:
+    - duration: 2        # seconds the phase runs
+      arrivalRate: 2     # new virtual users created per second
+      name: 'Load test - example export'
+
+before:
+  flow:
+    - function: 'authenticate'
+
+scenarios:
+  - name: 'Export items'
+    flow:
+      - function: 'exportItems'
