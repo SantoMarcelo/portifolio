@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Loja QA — Protótipo de interface</title>
+<style>
+/* ============ TOKENS ============ */
+:root {
+  --bg:#FAF7F2; --surface:#FFFFFF; --surface-2:#F2EDE4; --text:#1F1D1B; --muted:#5E5850;
+  --border:#D9D1C5; --accent:#9F3A1F; --accent-hover:#852F18; --on-accent:#FFFFFF;
+  --ok-bg:#E3F0E4; --ok:#1E5B2A; --warn-bg:#FBEBC8; --warn:#6B4500; --err-bg:#F9DEDA; --err:#8F1F12; --info-bg:#E2EAF3; --info:#1F3F66;
+  --focus:#1F4FD8; --shadow:0 1px 2px rgba(31,29,27,.06),0 8px 24px rgba(31,29,27,.06);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:10px; --gap:clamp(1rem,2vw,1.5rem);
+}
+[data-theme="dark"] {
+  --bg:#171513; --surface:#211E1B; --surface-2:#2B2723; --text:#F2EDE6; --muted:#B4ABA0;
+  --border:#413B34; --accent:#E8896B; --accent-hover:#F2A088; --on-accent:#1A0E09;
+  --ok-bg:#1D3322; --ok:#9BDBA6; --warn-bg:#3B2D0F; --warn:#F3CF86; --err-bg:#3E1D18; --err:#F5A89D; --info-bg:#1B2B40; --info:#A9C8F0;
+  --focus:#8CB0FF; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+/* ============ BASE ============ */
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+body{margin:0;font:1rem/1.6 var(--sans);color:var(--text);background:var(--bg)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.2;letter-spacing:-.01em;margin:0 0 .6em}
+h1{font-size:clamp(1.9rem,4vw,2.8rem)} h2{font-size:clamp(1.35rem,2.5vw,1.75rem)} h3{font-size:1.15rem}
+p{margin:0 0 1em} a{color:var(--accent);text-underline-offset:3px} a:hover{color:var(--accent-hover)}
+img,svg{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:1rem;top:-4rem;background:var(--text);color:var(--bg);padding:.7rem 1rem;border-radius:var(--r);z-index:100}
+.skip:focus{top:1rem}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(1rem,4vw,2rem)}
+.muted{color:var(--muted)} .eyebrow{font:600 .78rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;display:block}
+/* ============ BUTTONS / FORMS ============ */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:.6rem 1.2rem;border-radius:999px;border:1.5px solid var(--text);background:transparent;color:var(--text);font:600 .95rem var(--sans);cursor:pointer;text-decoration:none;transition:background .15s,color .15s,border-color .15s}
+.btn:hover{background:var(--surface-2);color:var(--text)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:var(--on-accent)} .btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover);color:var(--on-accent)}
+.btn-danger{border-color:var(--err);color:var(--err)}
+.btn-sm{min-height:36px;padding:.3rem .9rem;font-size:.85rem}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.icon-btn{min-width:44px;min-height:44px;border-radius:50%;padding:0}
+label,.label{display:block;font-weight:600;font-size:.92rem;margin-bottom:.35rem}
+.hint{display:block;font-weight:400;color:var(--muted);font-size:.85rem}
+input,select,textarea{width:100%;min-height:46px;padding:.6rem .85rem;border:1.5px solid var(--muted);border-radius:var(--r);background:var(--surface);color:var(--text);font:inherit}
+input[aria-invalid="true"]{border-color:var(--err);border-width:2px}
+input[type=radio],input[type=checkbox]{width:1.2rem;min-height:0;height:1.2rem;accent-color:var(--accent)}
+.field{margin-bottom:1.1rem} .field-error{display:flex;gap:.4rem;color:var(--err);font-size:.88rem;margin-top:.35rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--gap)} .grid-3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:0 var(--gap)}
+/* ============ BADGES / ALERTS (cor + ícone + texto) ============ */
+.badge{display:inline-flex;align-items:center;gap:.35rem;padding:.2rem .65rem;border-radius:999px;font-size:.8rem;font-weight:700}
+.b-ok{background:var(--ok-bg);color:var(--ok)} .b-warn{background:var(--warn-bg);color:var(--warn)} .b-err{background:var(--err-bg);color:var(--err)} .b-info{background:var(--info-bg);color:var(--info)}
+.alert{display:flex;gap:.7rem;padding:.9rem 1rem;border-radius:var(--r);border:1px solid currentColor;margin-bottom:1.2rem;font-size:.95rem}
+.alert strong{display:block}
+/* ============ HEADER ============ */
+.proto-bar{background:var(--text);color:var(--bg);font-size:.82rem}
+.proto-bar .wrap{display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:center;padding-top:.5rem;padding-bottom:.5rem}
+.proto-bar a{color:var(--bg);text-decoration:none;padding:.15rem .5rem;border-radius:6px} .proto-bar a:hover,.proto-bar a[aria-current]{background:rgba(128,128,128,.35);color:var(--bg)}
+.proto-bar b{opacity:.8;font-weight:600;margin-right:.3rem}
+.announce{background:var(--surface-2);text-align:center;font-size:.85rem;padding:.45rem 1rem;color:var(--muted)}
+header.site{background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;gap:1rem;min-height:72px}
+.brand{font:600 1.6rem var(--serif);letter-spacing:-.02em;color:var(--text);text-decoration:none;margin-right:auto}
+.brand span{color:var(--accent)}
+nav.main ul{display:flex;gap:.3rem;list-style:none;margin:0;padding:0;align-items:center}
+nav.main a.link{display:inline-flex;align-items:center;min-height:44px;padding:0 .8rem;color:var(--text);text-decoration:none;font-weight:500;border-bottom:2px solid transparent}
+nav.main a.link:hover{border-color:var(--border)} nav.main a[aria-current="page"]{border-color:var(--accent);font-weight:700}
+.cart-btn{position:relative}
+.cart-count{position:absolute;top:2px;right:0;min-width:20px;height:20px;border-radius:10px;background:var(--accent);color:var(--on-accent);font-size:.72rem;font-weight:700;display:grid;place-items:center;padding:0 5px}
+.menu-toggle{display:none}
+nav.main{order:1} .cart-btn{order:2} .menu-toggle{order:3}
+.cart-btn[aria-current]{background:var(--text);color:var(--bg)}
+.cart-btn[aria-current] .cart-count{background:var(--bg);color:var(--text)}
+@media (max-width:760px){
+  .menu-toggle{display:inline-flex}
+  nav.main{position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--border);display:none;padding:.5rem 1rem 1rem}
+  nav.main.open{display:block} nav.main ul{flex-direction:column;align-items:stretch}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+}
+/* ============ HERO / CARDS ============ */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:var(--gap);align-items:center;padding:clamp(2rem,6vw,4.5rem) 0}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:46ch}
+.hero-art{aspect-ratio:4/3.4;border-radius:200px 200px var(--r) var(--r);overflow:hidden;background:var(--surface-2)}
+@media (max-width:760px){.hero{grid-template-columns:1fr}.hero-art{max-height:280px;border-radius:var(--r)}}
+.filters{display:flex;flex-wrap:wrap;gap:.8rem;align-items:end;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:1.5rem 0}
+.filters .field{margin:0;flex:1 1 200px} .filters .field.grow{flex:2 1 280px}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem;padding:0;list-style:none}
+.chip{min-height:40px;padding:.4rem 1rem;border-radius:999px;border:1.5px solid var(--border);background:var(--surface);color:var(--text);font:500 .9rem var(--sans);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.products{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:calc(var(--gap)*1.4) var(--gap);list-style:none;padding:0;margin:0}
+.card{display:flex;flex-direction:column;height:100%}
+.card .media{position:relative;aspect-ratio:1/1;border-radius:var(--r);overflow:hidden;background:var(--surface-2);margin-bottom:.9rem;border:1px solid var(--border)}
+.card .media .badge{position:absolute;top:.7rem;left:.7rem}
+.card .cat{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.card h3{margin:.15rem 0 .3rem} .card h3 a{color:var(--text);text-decoration:none}
+.card h3 a::after{content:"";position:absolute;inset:0} /* cartão inteiro clicável */
+.card{position:relative}
+.card .actions{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding-top:.5rem}
+.card .actions .btn{position:relative;z-index:2}
+.price{font:600 1.25rem var(--serif)} .price small{font:400 .8rem var(--sans);color:var(--muted)}
+.pagination{display:flex;align-items:center;justify-content:center;gap:1rem;margin:3rem 0 1rem}
+/* ============ PRODUTO ============ */
+.crumbs{font-size:.88rem;margin:1.4rem 0} .crumbs ol{display:flex;gap:.5rem;list-style:none;padding:0;margin:0;flex-wrap:wrap} .crumbs li+li::before{content:"/";margin-right:.5rem;color:var(--muted)}
+.pdp{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(1.5rem,5vw,4rem);padding-bottom:3rem}
+.pdp .media{aspect-ratio:1/1;border-radius:var(--r);overflow:hidden;background:var(--surface-2);border:1px solid var(--border)}
+.pdp .price{font-size:2rem;margin:.5rem 0}
+.buy{display:flex;gap:.8rem;align-items:end;flex-wrap:wrap;margin:1.5rem 0}
+.specs{border-top:1px solid var(--border);margin-top:2rem} .specs div{display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid var(--border)} .specs dt{color:var(--muted)} .specs dd{margin:0;font-weight:600}
+@media (max-width:760px){.pdp{grid-template-columns:1fr}}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--text);border-radius:999px;overflow:hidden}
+.qty button{width:44px;height:44px;border:0;background:transparent;color:var(--text);font-size:1.2rem;cursor:pointer} .qty button:hover{background:var(--surface-2)}
+.qty output{min-width:2.5rem;text-align:center;font-weight:700}
+/* ============ TABELAS / PAINÉIS ============ */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:clamp(1rem,3vw,1.6rem);box-shadow:var(--shadow);margin-bottom:var(--gap)}
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.93rem} caption{text-align:left;padding:1rem;font:600 1.05rem var(--serif)}
+th,td{padding:.8rem 1rem;text-align:left;border-top:1px solid var(--border);vertical-align:middle} th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.thumb{width:64px;height:64px;border-radius:8px;overflow:hidden;background:var(--surface-2);flex:none}
+.item{display:flex;gap:1rem;align-items:center}
+.layout-2{display:grid;grid-template-columns:1fr 360px;gap:var(--gap);align-items:start;padding-bottom:3rem} @media (max-width:900px){.layout-2{grid-template-columns:1fr}}
+.summary dl{margin:0} .summary dl div{display:flex;justify-content:space-between;padding:.4rem 0} .summary dd{margin:0;font-variant-numeric:tabular-nums}
+.summary .total{border-top:1px solid var(--border);margin-top:.5rem;padding-top:.9rem;font:600 1.3rem var(--serif)}
+.summary .btn{width:100%;margin-top:1rem}
+/* ============ STEPPER ============ */
+.steps{display:flex;list-style:none;padding:0;margin:0 0 2rem;gap:.5rem;counter-reset:s}
+.steps li{flex:1;display:flex;align-items:center;gap:.6rem;font-size:.9rem;color:var(--muted);padding-bottom:.8rem;border-bottom:3px solid var(--border);counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:50%;border:1.5px solid currentColor;font-weight:700;font-size:.82rem;flex:none}
+.steps li[aria-current="step"]{color:var(--text);border-color:var(--accent);font-weight:700} .steps li[aria-current="step"]::before{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.steps li.done{color:var(--ok);border-color:var(--ok)} .steps li.done::before{content:"✓";background:var(--ok-bg)}
+@media (max-width:600px){.steps li span{display:none}.steps li[aria-current="step"] span{display:inline}}
+.pay-opt{display:flex;gap:.8rem;align-items:flex-start;padding:1rem;border:1.5px solid var(--border);border-radius:var(--r);margin-bottom:.7rem;cursor:pointer;background:var(--surface)}
+.pay-opt:has(input:checked){border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.pay-opt .label{margin:0}
+/* ============ ADMIN ============ */
+.admin{display:grid;grid-template-columns:230px 1fr;gap:var(--gap);padding:2rem 0 3rem} @media (max-width:860px){.admin{grid-template-columns:1fr}}
+.side{position:sticky;top:90px;align-self:start} .side ul{list-style:none;padding:0;margin:0;display:grid;gap:.2rem}
+.side a{display:flex;align-items:center;gap:.6rem;min-height:44px;padding:0 .9rem;border-radius:var(--r);color:var(--text);text-decoration:none;font-weight:500}
+.side a:hover{background:var(--surface-2)} .side a[aria-current="page"]{background:var(--text);color:var(--bg);font-weight:700}
+@media (max-width:860px){.side{position:static}.side ul{display:flex;overflow-x:auto}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:var(--gap);margin-bottom:var(--gap)}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem 1.2rem}
+.stat .n{font:600 2.2rem/1.1 var(--serif);display:block} .stat .l{color:var(--muted);font-size:.88rem}
+.bar{display:flex;height:14px;border-radius:7px;overflow:hidden;background:var(--surface-2);margin:.8rem 0}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;list-style:none;padding:0;margin:0;font-size:.9rem}
+.dot{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:.4rem;vertical-align:-1px}
+.toolbar{display:flex;gap:.8rem;flex-wrap:wrap;align-items:end;margin-bottom:1.2rem}
+/* ============ TOAST / FOOTER ============ */
+.toast{position:fixed;bottom:1.2rem;left:50%;transform:translate(-50%,150%);background:var(--text);color:var(--bg);padding:.8rem 1.2rem;border-radius:999px;box-shadow:var(--shadow);transition:transform .25s,visibility .25s;visibility:hidden;z-index:50;display:flex;gap:.6rem;align-items:center}
+.toast.show{transform:translate(-50%,0);visibility:visible}
+footer.site{border-top:1px solid var(--border);margin-top:3rem;padding:2.5rem 0;color:var(--muted);font-size:.9rem}
+footer.site .wrap{display:flex;flex-wrap:wrap;gap:1rem 3rem;justify-content:space-between}
+.center{text-align:center;max-width:560px;margin:3rem auto}
+.check{width:72px;height:72px;border-radius:50%;background:var(--ok-bg);color:var(--ok);display:grid;place-items:center;font-size:2rem;margin:0 auto 1.2rem}
+.screen{display:none} .screen.active{display:block}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+@media (forced-colors:active){.btn,.chip,input{border:2px solid ButtonText}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Pular para o conteúdo principal</a>
+
+<!-- Barra do protótipo (não faz parte da interface final) -->
+<div class="proto-bar" role="navigation" aria-label="Telas do protótipo">
+  <div class="wrap">
+    <b>PROTÓTIPO ▸</b>
+    <a href="#/">Vitrine</a><a href="#/produto">Produto</a><a href="#/carrinho">Carrinho</a><a href="#/checkout">Checkout</a><a href="#/confirmacao">Confirmação</a><a href="#/pedidos">Meus pedidos</a><a href="#/login">Login</a><a href="#/admin">Admin: Dashboard</a><a href="#/admin/produtos">Admin: Produtos</a><a href="#/admin/pedidos">Admin: Pedidos</a>
+    <button class="btn btn-sm" id="themeBtn" style="margin-left:auto;color:var(--bg);border-color:var(--bg)" aria-pressed="false">Tema escuro</button>
+  </div>
+</div>
+
+<div class="announce">Frete grátis em compras acima de R$ 300 · Cupom <strong>BEMVINDO10</strong> na primeira compra</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#/" aria-label="Loja QA — página inicial">Loja<span>.</span>QA</a>
+    <a class="btn icon-btn cart-btn" id="cartLink" href="#/carrinho" aria-label="Carrinho"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 7h12l-1 12H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cart-count" id="cartCount" aria-hidden="true">0</span></a>
+    <button class="btn icon-btn menu-toggle" id="menuBtn" aria-expanded="false" aria-controls="mainNav" aria-label="Menu">☰</button>
+    <nav class="main" id="mainNav" aria-label="Principal">
+      <ul id="navList"></ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+  <div class="wrap" id="view"></div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div><strong style="font-family:var(--serif);font-size:1.2rem;color:var(--text)">Loja.QA</strong><br>Sistema fictício para testes automatizados.</div>
+    <nav aria-label="Rodapé"><a href="#/">Vitrine</a> · <a href="#/pedidos">Meus pedidos</a> · <a href="#/login">Entrar</a></nav>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== Dados de exemplo ===== */
+const brl = v => v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const PRODUCTS = [
+  {id:1,name:'Cadeira Ergonômica Aurora',cat:'Móveis',price:1290,stock:12,hue:18},
+  {id:2,name:'Mesa de Carvalho Maciço',cat:'Móveis',price:2490,stock:3,hue:32},
+  {id:3,name:'Luminária de Mesa Arco',cat:'Iluminação',price:389.9,stock:25,hue:42},
+  {id:4,name:'Fone Bluetooth Studio',cat:'Áudio',price:799,stock:0,hue:210},
+  {id:5,name:'Teclado Mecânico Compacto',cat:'Periféricos',price:549,stock:40,hue:150},
+  {id:6,name:'Monitor Ultrawide 34"',cat:'Periféricos',price:3290,stock:2,hue:260},
+  {id:7,name:'Caneca de Cerâmica Artesanal',cat:'Casa',price:89.9,stock:60,hue:8},
+  {id:8,name:'Suporte para Notebook Alumínio',cat:'Periféricos',price:219,stock:18,hue:190},
+];
+const cart = {1:1,5:2};
+const cartCount = () => Object.values(cart).reduce((a,b)=>a+b,0);
+const find = id => PRODUCTS.find(p=>p.id==id);
+
+/* Ilustração placeholder (SVG) — no app real: <img src alt="nome do produto"> */
+function art(p,{alt=true}={}){
+  const h=p.hue;
+  return `<svg viewBox="0 0 400 400" role="img" aria-label="${alt?'Imagem ilustrativa de '+p.name:''}" ${alt?'':'aria-hidden="true"'}>
+  <rect width="400" height="400" fill="hsl(${h} 35% 88%)"/><circle cx="300" cy="110" r="90" fill="hsl(${h} 45% 78%)"/>
+  <rect x="110" y="190" width="180" height="120" rx="14" fill="hsl(${h} 40% 38%)"/><rect x="140" y="140" width="120" height="70" rx="10" fill="hsl(${h} 45% 52%)"/>
+  <rect x="90" y="310" width="220" height="10" rx="5" fill="hsl(${h} 30% 30% / .35)"/></svg>`;
+}
+const icon = {ok:'✓',warn:'⚠',err:'✕',info:'ℹ'};
+const stockBadge = p => p.stock===0 ? `<span class="badge b-err"><span aria-hidden="true">${icon.err}</span> Indisponível</span>`
+  : p.stock<=5 ? `<span class="badge b-warn"><span aria-hidden="true">${icon.warn}</span> Últimas ${p.stock} unidades</span>` : '';
+
+/* ===== Navegação do cabeçalho (varia por papel) ===== */
+function renderNav(route){
+  const cur = r => route===r ? ' aria-current="page"' : '';
+  const admin = route.startsWith('/admin');
+  document.getElementById('navList').innerHTML = admin
+   ? `<li><a class="link" href="#/">Ver loja</a></li><li><span class="badge b-info">Admin · Ana Souza</span></li><li><a class="btn btn-sm" href="#/login">Sair</a></li>`
+   : `<li><a class="link" href="#/"${cur('/')}>Vitrine</a></li>
+      <li><a class="link" href="#/pedidos"${cur('/pedidos')}>Meus pedidos</a></li>
+      <li><a class="btn btn-sm" href="#/login">Entrar</a></li>`;
+  const n=cartCount(), cl=document.getElementById('cartLink');
+  document.getElementById('cartCount').textContent=n;
+  cl.setAttribute('aria-label',`Carrinho, ${n} ${n==1?'item':'itens'}`);
+  route==='/carrinho'?cl.setAttribute('aria-current','page'):cl.removeAttribute('aria-current');
+}
+
+/* ===== Telas ===== */
+const screens = {};
+
+screens['/'] = () => `
+<section class="hero" aria-labelledby="h-hero">
+  <div><span class="eyebrow">Coleção outono</span>
+  <h1 id="h-hero">Objetos bem escolhidos para o seu dia a dia.</h1>
+  <p class="lead">Móveis, periféricos e peças de casa selecionados por qualidade e durabilidade. Entrega para todo o Brasil.</p>
+  <button class="btn btn-primary" onclick="const c=document.getElementById('catalogo');c.scrollIntoView({behavior:'smooth'});c.focus({preventScroll:true})">Ver produtos</button></div>
+  <div class="hero-art">${art(PRODUCTS[0],{alt:false})}</div>
+</section>
+<section aria-labelledby="catalogo-h" id="catalogo" tabindex="-1">
+  <h2 id="catalogo-h" style="margin-bottom:.2em">Produtos</h2>
+  <form class="filters" role="search" aria-label="Buscar e filtrar produtos" onsubmit="event.preventDefault();announce('Resultados atualizados: 8 produtos')">
+    <div class="field grow"><label for="q">Buscar por nome</label><input id="q" type="search" placeholder="Ex.: cadeira, teclado"></div>
+    <div class="field"><label for="cat">Categoria</label><select id="cat"><option>Todas as categorias</option><option>Móveis</option><option>Periféricos</option><option>Casa</option></select></div>
+    <div class="field"><label for="sort">Ordenar por</label><select id="sort"><option>Relevância</option><option>Menor preço</option><option>Maior preço</option><option>Nome (A–Z)</option></select></div>
+    <button class="btn btn-primary" type="submit">Buscar</button>
+  </form>
+  <p class="muted" role="status" id="count">8 produtos</p>
+  <ul class="products">${PRODUCTS.map(p=>`
+    <li><article class="card">
+      <div class="media">${art(p)}${p.stock===0||p.stock<=5?stockBadge(p):''}</div>
+      <span class="cat">${p.cat}</span>
+      <h3><a href="#/produto">${p.name}</a></h3>
+      <div class="actions"><span class="price">${brl(p.price)}</span>
+      <button class="btn btn-sm ${p.stock?'btn-primary':''}" ${p.stock?`onclick="addToCart(${p.id})"`:'disabled aria-disabled="true"'} aria-label="${p.stock?'Adicionar '+p.name+' ao carrinho':p.name+' indisponível'}">${p.stock?'Adicionar':'Esgotado'}</button></div>
+    </article></li>`).join('')}
+  </ul>
+  <nav class="pagination" aria-label="Paginação"><button class="btn btn-sm" disabled>← Anterior</button><span aria-live="polite">Página 1 de 3</span><button class="btn btn-sm">Próxima →</button></nav>
+</section>`;
+
+screens['/produto'] = () => { const p=PRODUCTS[0]; return `
+<nav class="crumbs" aria-label="Você está em"><ol><li><a href="#/">Vitrine</a></li><li><a href="#/">${p.cat}</a></li><li aria-current="page">${p.name}</li></ol></nav>
+<div class="pdp">
+  <div class="media">${art(p)}</div>
+  <div>
+    <span class="eyebrow">${p.cat} · SKU CAD-001</span>
+    <h1>${p.name}</h1>
+    <p class="price">${brl(p.price)} <small>ou 6x de ${brl(p.price/6)} sem juros</small></p>
+    <p><span class="badge b-ok"><span aria-hidden="true">${icon.ok}</span> Em estoque</span></p>
+    <p>Encosto em tela respirável, ajuste lombar e apoio de braço 4D. Pensada para jornadas longas de trabalho com conforto e postura correta.</p>
+    <div class="buy">
+      <div><span class="label" id="ql">Quantidade</span>
+      <div class="qty" role="group" aria-labelledby="ql"><button aria-label="Diminuir quantidade" onclick="step('pq',-1)">−</button><output id="pq" aria-live="polite">1</output><button aria-label="Aumentar quantidade" onclick="step('pq',1)">+</button></div></div>
+      <button class="btn btn-primary" onclick="addToCart(1,+document.getElementById('pq').textContent)" style="flex:1;min-width:200px">Adicionar ao carrinho</button>
+    </div>
+    <dl class="specs"><div><dt>Garantia</dt><dd>2 anos</dd></div><div><dt>Peso</dt><dd>14 kg</dd></div><div><dt>Entrega</dt><dd>3 a 7 dias úteis</dd></div></dl>
+  </div>
+</div>`};
+
+function cartRows(){
+  return Object.entries(cart).map(([id,q])=>{const p=find(id);return `
+  <tr><td><div class="item"><div class="thumb">${art(p,{alt:false})}</div><div><a href="#/produto"><strong>${p.name}</strong></a><br><span class="muted">${brl(p.price)} cada</span></div></div></td>
+  <td><div class="qty" role="group" aria-label="Quantidade de ${p.name}"><button aria-label="Diminuir" onclick="cartQty(${id},-1)">−</button><output aria-live="polite">${q}</output><button aria-label="Aumentar" onclick="cartQty(${id},1)">+</button></div></td>
+  <td class="num"><strong>${brl(p.price*q)}</strong></td>
+  <td class="num"><button class="btn btn-sm btn-danger" onclick="removeItem(${id})" aria-label="Remover ${p.name} do carrinho">Remover</button></td></tr>`}).join('');
+}
+const subtotal = () => Object.entries(cart).reduce((s,[id,q])=>s+find(id).price*q,0);
+const shipping = () => subtotal()>=300?0:29.9;
+function summary(btn){ const s=subtotal(),f=shipping(); return `
+<aside class="panel summary" aria-labelledby="rs"><h2 id="rs">Resumo</h2>
+<dl><div><dt>Subtotal</dt><dd>${brl(s)}</dd></div><div><dt>Desconto</dt><dd>${brl(0)}</dd></div><div><dt>Frete</dt><dd>${f?brl(f):'Grátis'}</dd></div><div class="total"><dt>Total</dt><dd>${brl(s+f)}</dd></div></dl>${btn||''}</aside>`}
+
+screens['/carrinho'] = () => Object.keys(cart).length===0 ? `
+<div class="center"><h1>Seu carrinho está vazio</h1><p class="muted">Explore a vitrine e adicione produtos para continuar.</p><a class="btn btn-primary" href="#/">Ir para a vitrine</a></div>` : `
+<h1 style="margin-top:2rem">Carrinho</h1>
+<div class="layout-2"><div class="table-wrap"><table><caption class="sr-only">Itens no carrinho</caption>
+<thead><tr><th scope="col">Produto</th><th scope="col">Quantidade</th><th scope="col" class="num">Subtotal</th><th scope="col"><span class="sr-only">Ações</span></th></tr></thead><tbody>${cartRows()}</tbody></table></div>
+${summary('<a class="btn btn-primary" href="#/checkout">Finalizar compra</a><a class="btn" style="width:100%;margin-top:.6rem;border-color:transparent" href="#/">Continuar comprando</a>')}</div>`;
+
+let step_i = 0, showErr = false;
+const STEPS=['Revisão','Endereço','Pagamento','Confirmação'];
+screens['/checkout'] = () => {
+  const stepper = `<ol class="steps" aria-label="Etapas do checkout">${STEPS.map((s,i)=>`<li class="${i<step_i?'done':''}" ${i===step_i?'aria-current="step"':''}><span>${s}${i<step_i?'<span class="sr-only"> (concluída)</span>':''}</span></li>`).join('')}</ol>`;
+  let body='';
+  if(step_i===0) body=`<div class="layout-2"><div>
+    <h2>Revise seus itens</h2><div class="table-wrap"><table><caption class="sr-only">Itens do pedido</caption><thead><tr><th scope="col">Produto</th><th scope="col" class="num">Qtd</th><th scope="col" class="num">Subtotal</th></tr></thead><tbody>
+    ${Object.entries(cart).map(([id,q])=>`<tr><td>${find(id).name}</td><td class="num">${q}</td><td class="num">${brl(find(id).price*q)}</td></tr>`).join('')}</tbody></table></div>
+    <h2 style="margin-top:2rem">Cupom de desconto</h2>
+    <div class="toolbar"><div class="field" style="margin:0;flex:1;max-width:320px"><label for="cp">Código do cupom</label><input id="cp" aria-describedby="cph"></div><button class="btn" onclick="toast('Cupom BEMVINDO10 aplicado: 10% de desconto')">Aplicar</button></div><span class="hint" id="cph">Opcional.</span></div>
+    ${summary('<button class="btn btn-primary" onclick="go(1)">Continuar</button><a class="btn" style="width:100%;margin-top:.6rem;border-color:transparent" href="#/carrinho">← Voltar ao carrinho</a>')}</div>`;
+  if(step_i===1) body=`<div class="layout-2"><form class="panel" novalidate onsubmit="event.preventDefault();addrNext()" aria-labelledby="ea">
+    <h2 id="ea">Endereço de entrega</h2>
+    ${showErr?`<div class="alert b-err" role="alert" tabindex="-1" id="errsum"><span aria-hidden="true">${icon.err}</span><div><strong>Corrija 2 campos para continuar</strong><ul style="margin:.3rem 0 0;padding-left:1.1rem"><li><a href="#cep">CEP inválido (use 00000-000)</a></li><li><a href="#num">Número obrigatório</a></li></ul></div></div>`:''}
+    <p class="muted">Campos marcados com <span aria-hidden="true">*</span><span class="sr-only">asterisco</span> são obrigatórios.</p>
+    <div class="grid-2"><div class="field"><label for="cep">CEP *</label><input id="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" required ${showErr?'aria-invalid="true" aria-describedby="cep-e" value="123"':''}>${showErr?'<span class="field-error" id="cep-e"><span aria-hidden="true">✕</span> CEP inválido (use 00000-000)</span>':''}</div><div></div></div>
+    <div class="grid-3"><div class="field"><label for="rua">Rua *</label><input id="rua" autocomplete="address-line1" required></div><div class="field"><label for="num">Número *</label><input id="num" required ${showErr?'aria-invalid="true" aria-describedby="num-e"':''}>${showErr?'<span class="field-error" id="num-e"><span aria-hidden="true">✕</span> Número obrigatório</span>':''}</div><div class="field"><label for="comp">Complemento <span class="hint" style="display:inline">(opcional)</span></label><input id="comp"></div></div>
+    <div class="grid-3"><div class="field"><label for="bairro">Bairro *</label><input id="bairro" required></div><div class="field"><label for="cid">Cidade *</label><input id="cid" autocomplete="address-level2" required></div><div class="field"><label for="uf">UF *</label><input id="uf" maxlength="2" autocomplete="address-level1" required></div></div>
+    <div style="display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap"><button type="button" class="btn" onclick="go(0)">Voltar</button><button class="btn btn-primary">Continuar</button></div></form>${summary()}</div>`;
+  if(step_i===2) body=`<div class="layout-2"><form class="panel" onsubmit="event.preventDefault();go(3)"><fieldset style="border:0;padding:0;margin:0"><legend><h2>Forma de pagamento</h2></legend>
+    <label class="pay-opt"><input type="radio" name="pay" checked><span><span class="label">Cartão de crédito</span><span class="hint">Até 6x sem juros</span></span></label>
+    <label class="pay-opt"><input type="radio" name="pay"><span><span class="label">PIX</span><span class="hint">Aprovação imediata</span></span></label>
+    <label class="pay-opt"><input type="radio" name="pay"><span><span class="label">Boleto</span><span class="hint">Vence em 3 dias úteis</span></span></label></fieldset>
+    <div class="grid-2" style="margin-top:1.2rem"><div class="field"><label for="cn">Número do cartão</label><input id="cn" inputmode="numeric" autocomplete="cc-number" placeholder="0000 0000 0000 0000"></div><div class="field"><label for="ch">Nome no cartão</label><input id="ch" autocomplete="cc-name"></div></div>
+    <div style="display:flex;justify-content:space-between;gap:1rem"><button type="button" class="btn" onclick="go(1)">Voltar</button><button class="btn btn-primary">Continuar</button></div></form>${summary()}</div>`;
+  if(step_i===3) body=`<div class="layout-2"><div class="panel"><h2>Confirme seu pedido</h2>
+    <dl class="specs" style="margin-top:0;border-top:0"><div><dt>Entrega</dt><dd>Rua das Flores, 120 — Centro, São Paulo/SP</dd></div><div><dt>Pagamento</dt><dd>Cartão de crédito (final 4242)</dd></div><div><dt>Itens</dt><dd>${Object.entries(cart).map(([id,q])=>q+'× '+find(id).name).join(', ')}</dd></div></dl>
+    <div style="display:flex;justify-content:space-between;gap:1rem;margin-top:1.5rem"><button class="btn" onclick="go(2)">Voltar</button></div></div>
+    ${summary('<a class="btn btn-primary" href="#/confirmacao">Confirmar pedido</a>')}</div>`;
+  return `<h1 style="margin-top:2rem">Checkout</h1>${stepper}<div id="stepbody">${body}</div>`;
+};
+
+screens['/confirmacao'] = () => `
+<div class="center"><div class="check" aria-hidden="true">✓</div><h1 tabindex="-1" id="conf-h">Pedido #1042 confirmado</h1>
+<p class="muted">Enviamos os detalhes para ana@exemplo.com. Previsão de entrega: 3 a 7 dias úteis.</p>
+<p><span class="badge b-ok"><span aria-hidden="true">✓</span> Pago</span></p>
+<p><a class="btn btn-primary" href="#/pedidos">Ver meus pedidos</a> <a class="btn" href="#/">Continuar comprando</a></p></div>`;
+
+const ORDERS=[[1042,'27/10/2026','Pago','ok','R$ 2.400,00'],[1031,'12/10/2026','Pendente','warn','R$ 389,90'],[1020,'30/09/2026','Pagamento falhou','err','R$ 799,00'],[1011,'02/09/2026','Cancelado','err','R$ 219,00']];
+const sIcon={ok:icon.ok,warn:'⏱',err:icon.err};
+screens['/pedidos'] = () => `
+<h1 style="margin-top:2rem">Meus pedidos</h1>
+<div class="table-wrap"><table><caption class="sr-only">Histórico de pedidos</caption><thead><tr><th scope="col">Pedido</th><th scope="col">Data</th><th scope="col">Status</th><th scope="col" class="num">Total</th><th scope="col"><span class="sr-only">Ações</span></th></tr></thead><tbody>
+${ORDERS.map(o=>`<tr><th scope="row" style="background:none;text-transform:none;letter-spacing:0;color:var(--text);font-size:.93rem">#${o[0]}</th><td>${o[1]}</td><td><span class="badge b-${o[3]}"><span aria-hidden="true">${sIcon[o[3]]}</span> ${o[2]}</span></td><td class="num">${o[4]}</td><td class="num"><a href="#/pedidos" aria-label="Ver detalhes do pedido ${o[0]}">Detalhes</a></td></tr>`).join('')}</tbody></table></div>`;
+
+screens['/login'] = () => `
+<div class="center" style="text-align:left"><h1>Entrar</h1><p class="muted">Ainda não tem conta? <a href="#/login">Cadastre-se</a></p>
+<form class="panel" novalidate onsubmit="event.preventDefault();toast('Login simulado')">
+<div class="field"><label for="em">E-mail</label><input id="em" type="email" autocomplete="email" required></div>
+<div class="field"><label for="pw">Senha</label><input id="pw" type="password" autocomplete="current-password" required aria-describedby="pwh"><span class="hint" id="pwh" style="margin-top:.3rem">Mínimo de 8 caracteres.</span></div>
+<button class="btn btn-primary" style="width:100%">Entrar</button></form></div>`;
+
+/* Admin */
+function adminShell(route,content){ const l=(h,t,i)=>`<li><a href="${h}" ${route===h.slice(1)?'aria-current="page"':''}><span aria-hidden="true">${i}</span> ${t}</a></li>`;
+  return `<div class="admin"><nav class="side" aria-label="Administração"><ul>${l('#/admin','Dashboard','▦')}${l('#/admin/produtos','Produtos','◫')}${l('#/admin/estoque','Estoque','▤')}${l('#/admin/pedidos','Pedidos','☰')}</ul></nav><div>${content}</div></div>`}
+
+screens['/admin'] = () => adminShell('/admin',`
+<h1>Dashboard</h1>
+<div class="stats" role="list">
+<div class="stat" role="listitem"><span class="n">48</span><span class="l">Produtos cadastrados</span></div>
+<div class="stat" role="listitem"><span class="n">6</span><span class="l"><span class="badge b-warn"><span aria-hidden="true">⚠</span> Estoque baixo</span></span></div>
+<div class="stat" role="listitem"><span class="n">3</span><span class="l"><span class="badge b-err"><span aria-hidden="true">✕</span> Sem estoque</span></span></div>
+<div class="stat" role="listitem"><span class="n">212</span><span class="l">Pedidos no total</span></div></div>
+<section class="panel" aria-labelledby="op"><h2 id="op">Pedidos por status</h2>
+<div class="bar" role="img" aria-label="Pagos 140, pendentes 38, falhas 20, cancelados 14"><span style="width:66%;background:var(--ok)"></span><span style="width:18%;background:#B7791F"></span><span style="width:9%;background:var(--err)"></span><span style="width:7%;background:var(--muted)"></span></div>
+<ul class="legend"><li><span class="dot" style="background:var(--ok)"></span>Pagos <strong>140</strong></li><li><span class="dot" style="background:#B7791F"></span>Pendentes <strong>38</strong></li><li><span class="dot" style="background:var(--err)"></span>Falha no pagamento <strong>20</strong></li><li><span class="dot" style="background:var(--muted)"></span>Cancelados <strong>14</strong></li></ul></section>`);
+
+screens['/admin/produtos'] = () => adminShell('/admin/produtos',`
+<div class="toolbar" style="justify-content:space-between;align-items:center"><h1 style="margin:0">Produtos</h1><a class="btn btn-primary" href="#/admin/produtos">+ Novo produto</a></div>
+<div class="toolbar"><div class="field" style="margin:0;flex:1;min-width:220px"><label for="aq">Buscar</label><input id="aq" type="search" placeholder="Nome ou SKU"></div><div class="field" style="margin:0"><label for="as">Situação</label><select id="as"><option>Todos</option><option>Ativos</option><option>Inativos</option></select></div></div>
+<div class="table-wrap"><table><caption class="sr-only">Lista de produtos</caption><thead><tr><th scope="col">Produto</th><th scope="col">SKU</th><th scope="col" class="num">Preço</th><th scope="col" class="num">Estoque</th><th scope="col">Situação</th><th scope="col"><span class="sr-only">Ações</span></th></tr></thead><tbody>
+${PRODUCTS.slice(0,6).map((p,i)=>`<tr><td><div class="item"><div class="thumb">${art(p,{alt:false})}</div><strong>${p.name}</strong></div></td><td class="muted">SKU-00${p.id}</td><td class="num">${brl(p.price)}</td><td class="num">${p.stock===0?'<span class="badge b-err"><span aria-hidden="true">✕</span> 0</span>':p.stock<=5?`<span class="badge b-warn"><span aria-hidden="true">⚠</span> ${p.stock}</span>`:p.stock}</td><td>${i==3?'<span class="badge b-info">Inativo</span>':'<span class="badge b-ok"><span aria-hidden="true">✓</span> Ativo</span>'}</td>
+<td class="num"><a class="btn btn-sm" href="#/admin/produtos" aria-label="Editar ${p.name}">Editar</a></td></tr>`).join('')}</tbody></table></div>`);
+
+screens['/admin/estoque'] = () => adminShell('/admin/estoque',`<h1>Estoque</h1><div class="alert b-info"><span aria-hidden="true">ℹ</span><div><strong>Fora do escopo deste protótipo</strong>Usa o mesmo padrão de tabela + formulário de movimentação (Entrada / Saída / Ajuste).</div></div>`);
+
+screens['/admin/pedidos'] = () => adminShell('/admin/pedidos',`
+<h1>Pedidos</h1>
+<div class="toolbar"><div class="field" style="margin:0"><label for="os">Status</label><select id="os"><option>Todos</option><option>Pago</option><option>Pendente</option><option>Pagamento falhou</option><option>Cancelado</option></select></div></div>
+<div class="table-wrap"><table><caption class="sr-only">Pedidos</caption><thead><tr><th scope="col">Pedido</th><th scope="col">Cliente</th><th scope="col">Status</th><th scope="col" class="num">Total</th><th scope="col"><span class="sr-only">Ações</span></th></tr></thead><tbody>
+${ORDERS.map((o,i)=>`<tr><td>#${o[0]}</td><td>${['Ana Souza','Bruno Lima','Carla Dias','Diego Melo'][i]}</td><td><span class="badge b-${o[3]}"><span aria-hidden="true">${sIcon[o[3]]}</span> ${o[2]}</span></td><td class="num">${o[4]}</td><td class="num"><a href="#/admin/pedidos" aria-label="Ver pedido ${o[0]}">Detalhes</a></td></tr>`).join('')}</tbody></table></div>`);
+
+/* ===== Interações ===== */
+const view=document.getElementById('view'), toastEl=document.getElementById('toast'); let tt;
+function toast(msg){toastEl.innerHTML=`<span aria-hidden="true">✓</span> ${msg}`;toastEl.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>toastEl.classList.remove('show'),3200)}
+function announce(m){document.getElementById('count').textContent=m}
+function addToCart(id,n=1){cart[id]=(cart[id]||0)+n;renderNav(currentRoute());toast(`${find(id).name} adicionado ao carrinho`)}
+function step(id,d){const o=document.getElementById(id);o.textContent=Math.max(1,+o.textContent+d)}
+function cartQty(id,d){cart[id]=Math.max(1,cart[id]+d);render()}
+function removeItem(id){const n=find(id).name;delete cart[id];render();toast(n+' removido do carrinho')}
+function go(i){step_i=i;showErr=false;render()}
+function addrNext(){showErr=true;render();document.getElementById('errsum')?.focus()}
+const currentRoute=()=>(location.hash.replace('#','')||'/');
+function render(){
+  const r=currentRoute(), fn=screens[r]||screens['/'];
+  view.innerHTML=fn(); renderNav(r);
+  document.querySelectorAll('.proto-bar a').forEach(a=>a.getAttribute('href')==='#'+r?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current'));
+  document.getElementById('mainNav').classList.remove('open');document.getElementById('menuBtn').setAttribute('aria-expanded','false');
+}
+let lastRoute;
+window.addEventListener('hashchange',()=>{ const r=currentRoute(); if(r!==lastRoute){ if(r==='/checkout')step_i=0; render(); lastRoute=r; if(r!=='/'||location.hash!=='#catalogo'){window.scrollTo(0,0);document.getElementById('main').focus({preventScroll:true})} } });
+document.getElementById('menuBtn').onclick=e=>{const n=document.getElementById('mainNav'),o=n.classList.toggle('open');e.currentTarget.setAttribute('aria-expanded',o)};
+document.getElementById('themeBtn').onclick=e=>{const d=document.documentElement,dark=d.dataset.theme!=='dark';d.dataset.theme=dark?'dark':'light';e.currentTarget.setAttribute('aria-pressed',dark);e.currentTarget.textContent=dark?'Tema claro':'Tema escuro'};
+if(matchMedia('(prefers-color-scheme: dark)').matches)document.getElementById('themeBtn').click();
+lastRoute=currentRoute();render();
+</script>
+</body>
+</html>

@@ -45,7 +45,9 @@ model StockMovement {
   id        Int      @id @default(autoincrement())
   productId Int
   type      String // ENTRY | EXIT | ADJUSTMENT
-  quantity  Int // ENTRY/EXIT: quantidade movimentada; ADJUSTMENT: novo estoque absoluto
+  quantity  Int // ENTRY/EXIT: quantidade movimentada; ADJUSTMENT: novo estoque absoluto informado
+  previousStock Int
+  newStock      Int
   reason    String
   userId    Int
   createdAt DateTime @default(now())

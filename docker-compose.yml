@@ -1,0 +1,32 @@
+# Sobe backend (http://localhost:3333) e frontend (http://localhost:5173) com: docker compose up --build
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3333:3333"
+    environment:
+      # Mantenha diferente de "production" para os endpoints /api/test/* ficarem ativos
+      NODE_ENV: development
+      JWT_SECRET: ${JWT_SECRET:-troque-este-segredo-em-producao}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-24h}
+      SIMULATE_LATENCY_MS: ${SIMULATE_LATENCY_MS:-0}
+      CORS_ORIGIN: http://localhost:5173
+    volumes:
+      - backend-data:/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3333/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 15s
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      backend:
+        condition: service_healthy
+
+volumes:
+  backend-data:

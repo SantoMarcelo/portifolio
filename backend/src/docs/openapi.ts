@@ -1,5 +1,9 @@
 import { isProduction } from '../config/env';
 import { authPaths, authSchemas } from '../modules/auth/auth.docs';
+import { cartPaths, cartSchemas } from '../modules/cart/cart.docs';
+import { orderPaths, orderSchemas } from '../modules/orders/orders.docs';
+import { productPaths, productSchemas } from '../modules/products/products.docs';
+import { stockPaths, stockSchemas } from '../modules/stock/stock.docs';
 import { testUtilsPaths } from '../modules/test-utils/test-utils.docs';
 import { errorResponse, jsonResponse } from './helpers';
 
@@ -13,7 +17,7 @@ export const openapi = {
       'Usuários seed: admin@loja.com / Admin@123 (ADMIN) e cliente@loja.com / Cliente@123 (CUSTOMER).',
   },
   servers: [{ url: '/' }],
-  tags: [{ name: 'Health' }, { name: 'Auth' }, ...(isProduction ? [] : [{ name: 'Test utils' }])],
+  tags: [{ name: 'Health' }, { name: 'Auth' }, { name: 'Vitrine' }, { name: 'Carrinho' }, { name: 'Checkout e Pedidos' }, { name: 'Admin - Produtos' }, { name: 'Admin - Pedidos' }, { name: 'Admin - Estoque' }, ...(isProduction ? [] : [{ name: 'Test utils' }])],
   components: {
     securitySchemes: { bearerAuth: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' } },
     schemas: {
@@ -31,6 +35,10 @@ export const openapi = {
         },
       },
       ...authSchemas,
+      ...productSchemas,
+      ...stockSchemas,
+      ...cartSchemas,
+      ...orderSchemas,
     },
   },
   paths: {
@@ -52,6 +60,10 @@ export const openapi = {
       },
     },
     ...authPaths,
+    ...productPaths,
+    ...stockPaths,
+    ...cartPaths,
+    ...orderPaths,
     ...(isProduction ? {} : testUtilsPaths),
   },
 };
