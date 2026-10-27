@@ -32,3 +32,13 @@ export function useFetch<T>(load: () => Promise<T>, deps: unknown[]) {
   const reload = useCallback(() => setVersion((v) => v + 1), [])
   return { data, error, loading, reload }
 }
+
+/** Valor com atraso (evita uma requisição por tecla digitada). */
+export function useDebounced<T>(value: T, delayMs = 300) {
+  const [debounced, setDebounced] = useState(value)
+  useEffect(() => {
+    const timer = setTimeout(() => setDebounced(value), delayMs)
+    return () => clearTimeout(timer)
+  }, [value, delayMs])
+  return debounced
+}

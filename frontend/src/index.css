@@ -172,3 +172,9 @@ tr.inactive td { opacity:.6; } tr.selected td { background:var(--info-bg); }
 
 @media (prefers-reduced-motion:reduce) { * { transition:none !important; animation:none !important; scroll-behavior:auto !important; } }
 @media (forced-colors:active) { .btn, input, select { border:2px solid ButtonText; } }
+
+/* ============ ABAS ============ */
+.tabs { display:flex; gap:.25rem; border-bottom:1px solid var(--border); margin-bottom:var(--gap); overflow-x:auto; }
+.tab { appearance:none; background:none; border:0; border-bottom:3px solid transparent; margin-bottom:-1px; min-height:44px; padding:0 1.1rem; font:600 .95rem var(--sans); color:var(--muted); cursor:pointer; white-space:nowrap; }
+.tab:hover { color:var(--text); background:var(--surface-2); border-radius:var(--r) var(--r) 0 0; }
+.tab[aria-selected="true"] { color:var(--text); border-bottom-color:var(--accent); }

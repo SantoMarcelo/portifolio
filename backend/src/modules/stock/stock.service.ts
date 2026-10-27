@@ -64,6 +64,7 @@ export async function adjustStock(productId: number, input: StockAdjustInput, us
 export async function listMovements(query: MovementsQuery) {
   const where: Prisma.StockMovementWhereInput = {
     ...(query.productId ? { productId: query.productId } : {}),
+    ...(query.search ? { product: { name: { contains: query.search } } } : {}),
     ...(query.type ? { type: query.type } : {}),
   };
   const [total, items] = await prisma.$transaction([

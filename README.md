@@ -203,7 +203,7 @@ Listagens paginadas retornam `{ "data": [...], "pagination": { "page", "pageSize
 | PUT | `/admin/products/:id` | ADMIN | Edita produto |
 | DELETE | `/admin/products/:id` | ADMIN | Soft delete (204, idempotente) |
 | POST | `/admin/products/:id/stock` | ADMIN | Entrada, saída ou ajuste |
-| GET | `/admin/stock/movements` | ADMIN | Histórico (`productId`, `type`, paginação) |
+| GET | `/admin/stock/movements` | ADMIN | Histórico (`productId`, `search` por nome do produto, `type`, paginação) |
 | GET | `/admin/dashboard` | ADMIN | Totais de produtos, estoque baixo e pedidos |
 | GET | `/admin/orders` | ADMIN | Todos os pedidos (filtro `status`) |
 | GET | `/admin/orders/:id` | ADMIN | Detalhe de qualquer pedido |
@@ -311,7 +311,7 @@ Na UI, injete o token expirado no `localStorage` (chave `loja_token`) e navegue:
 | Pedidos | `order-confirmation-page`, `order-confirmation-id`, `order-confirmation-status`, `orders-table`, `order-row-{id}`, `order-row-status-{id}`, `order-row-total-{id}`, `order-detail-page`, `order-detail-status`, `order-detail-total`, `order-item-{productId}`, `order-cancel-button` |
 | Admin: navegação e dashboard | `admin-nav-{dashboard\|products\|stock\|orders}`, `dashboard-total-products`, `dashboard-low-stock`, `dashboard-out-of-stock`, `dashboard-total-orders`, `dashboard-orders-{paid\|cancelled\|payment-failed\|pending}` |
 | Admin: produtos | `admin-products-table`, `admin-product-row-{id}`, `admin-product-stock-{id}`, `low-stock-badge-{id}`, `admin-product-active-{id}`, `admin-product-edit-{id}`, `admin-product-delete-{id}`, `admin-product-new-button`, `product-form-{name\|description\|price\|stock\|sku\|category\|image-url}-input`, `product-form-active-checkbox`, `product-form-submit-button`, `product-form-error` |
-| Admin: estoque | `stock-products-table`, `stock-row-{id}`, `stock-adjust-button-{id}`, `stock-form`, `stock-type-select`, `stock-quantity-input`, `stock-reason-input`, `stock-submit-button`, `stock-form-success`, `stock-form-error`, `stock-movements-table`, `stock-movement-row-{id}` |
+| Admin: estoque | `stock-search-input`, `stock-tab-stock`, `stock-tab-history`, `stock-tab-panel-stock`, `stock-tab-panel-history`, `stock-products-pagination-*`, `stock-movements-pagination-*`, `stock-products-table`, `stock-row-{id}`, `stock-adjust-button-{id}`, `stock-form`, `stock-type-select`, `stock-quantity-input`, `stock-reason-input`, `stock-submit-button`, `stock-form-success`, `stock-form-error`, `stock-movements-table`, `stock-movements-empty`, `stock-movement-row-{id}` |
 | Admin: pedidos | `admin-orders-status-filter`, `admin-orders-table`, `admin-order-row-{id}`, `admin-order-status-{id}`, `admin-order-link-{id}`, `admin-order-cancel-{id}` |
 | Acesso | `forbidden-page`, `not-found-page` |
 

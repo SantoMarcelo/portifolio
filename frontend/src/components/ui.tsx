@@ -100,19 +100,22 @@ export function ConfirmButton(props: {
 export function Pagination(props: {
   pagination: { page: number; totalPages: number; total: number }
   onPage: (page: number) => void
+  /** Prefixo dos data-testid (use outro valor quando houver mais de uma paginação na tela). */
+  testId?: string
 }) {
   const { page, totalPages, total } = props.pagination
+  const id = props.testId ?? 'pagination'
   return (
-    <nav className="pagination" data-testid="pagination" aria-label="Paginação">
-      <button className="btn" data-testid="pagination-prev" disabled={page <= 1} onClick={() => props.onPage(page - 1)}>
+    <nav className="pagination" data-testid={id} aria-label="Paginação">
+      <button className="btn" data-testid={`${id}-prev`} disabled={page <= 1} onClick={() => props.onPage(page - 1)}>
         Anterior
       </button>
-      <span data-testid="pagination-info">
+      <span data-testid={`${id}-info`}>
         Página {page} de {Math.max(totalPages, 1)} ({total} {total === 1 ? 'item' : 'itens'})
       </span>
       <button
         className="btn"
-        data-testid="pagination-next"
+        data-testid={`${id}-next`}
         disabled={page >= totalPages}
         onClick={() => props.onPage(page + 1)}
       >

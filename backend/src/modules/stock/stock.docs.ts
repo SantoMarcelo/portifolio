@@ -49,6 +49,7 @@ export const stockPaths = {
       security: bearer,
       parameters: [
         param('productId', 'query', { type: 'integer' }),
+        param('search', 'query', { type: 'string' }, 'Filtra pelo nome do produto (contém)'),
         param('type', 'query', { type: 'string', enum: ['ENTRY', 'EXIT', 'ADJUSTMENT'] }),
         ...pageParams,
       ],

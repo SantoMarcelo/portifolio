@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import type { PrismaClient } from '@prisma/client';
 
 export const SEED_USERS = [
-  { name: 'Administrador', email: 'admin@loja.com', password: 'Admin@123', role: 'ADMIN' },
+  { name: 'Admin', email: 'admin@loja.com', password: 'Admin@123', role: 'ADMIN' },
   { name: 'Cliente Teste', email: 'cliente@loja.com', password: 'Cliente@123', role: 'CUSTOMER' },
 ];
 

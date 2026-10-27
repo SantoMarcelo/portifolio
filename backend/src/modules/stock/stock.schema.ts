@@ -18,6 +18,7 @@ export const stockAdjustSchema = z.object({
 
 export const movementsQuerySchema = paginationSchema.extend({
   productId: z.coerce.number().int().positive().optional(),
+  search: z.string().trim().optional(),
   type: z.enum(STOCK_MOVEMENT_TYPES).optional(),
 });
 

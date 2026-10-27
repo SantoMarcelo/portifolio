@@ -84,7 +84,7 @@ Pedidos: CUSTOMER A não acessa pedido de CUSTOMER B (`GET /orders/:id` e `POST 
 | S5 | Sem `reason` / `reason` com 2 caracteres | 400 | P2 |
 | S6 | Tipo inválido (`"type":"FOO"`) | 400 | P2 |
 | S7 | Produto inexistente | 404 `PRODUCT_NOT_FOUND` | P2 |
-| S8 | Histórico: ordem decrescente por data, filtros `productId` e `type`, `user` e `product` preenchidos | | P2 |
+| S8 | Histórico: ordem decrescente por data, filtros `productId`, `search` (nome do produto, contém) e `type`, `user` e `product` preenchidos | | P2 |
 | S9 | Cada operação válida gera **exatamente 1** movimentação; operação inválida não gera nenhuma | | P1 |
 | S10 | Dashboard: `lowStockProducts` (ativos com estoque < 5, inclui zerados) e `outOfStockProducts` batem com a listagem | 3 e 1 no seed | P2 |
 | S11 | Limite de "estoque baixo": estoque 4 → `lowStock=true`; estoque 5 → `false` | | P1 |
@@ -244,7 +244,7 @@ Use os `data-testid` do [README](../README.md#convenção-de-data-testid).
 - **Criar:** erros por campo (nome curto, preço 0, SKU vazio, estoque negativo); SKU duplicado → `SKU_ALREADY_EXISTS`; sucesso volta para a lista.
 - **Editar:** formulário carrega os dados; estoque aparece desabilitado; salvar mantém o estoque.
 - **Remover:** confirmação inline; linha passa para "Inativo"; produto some da vitrine.
-- **Estoque:** selecionar produto, entrada/saída/ajuste; saída acima do estoque mostra `INSUFFICIENT_STOCK`; `stock-form-current-stock` e o histórico atualizam; link "Estoque" da lista abre o produto selecionado.
+- **Estoque (duas abas):** o filtro de produto (`stock-search-input`) vale para as duas abas e é mantido ao trocar de aba. A aba "Histórico de movimentações" mostra **somente** o histórico (sem a tabela de produtos): sem filtro a lista fica vazia (`stock-movements-empty`) e nenhuma chamada a `GET /admin/stock/movements` é feita; com filtro, lista as movimentações dos produtos cujo nome contém o texto (parâmetro `search`, com atraso de ~300 ms) — um filtro amplo pode trazer vários produtos. Na aba "Estoque": selecionar produto, entrada/saída/ajuste; saída acima do estoque mostra `INSUFFICIENT_STOCK`; `stock-form-current-stock` atualiza e o histórico reflete a movimentação ao abrir a aba; link "Estoque" da lista de produtos abre o produto selecionado.
 - **Pedidos:** filtro por status; detalhe com dados do cliente; cancelar pedido `PAID` e ver o status mudar.
 
 ### 3.8 Multi-aba e sessões (P3)
