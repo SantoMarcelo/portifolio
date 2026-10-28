@@ -3,7 +3,7 @@ import { LOW_STOCK_THRESHOLD } from '../../constants';
 import { prisma } from '../../prisma/client';
 import { AppError } from '../../utils/app-error';
 import { pageResult, paginate } from '../../utils/pagination';
-import { changeStock } from '../stock/stock.service';
+import { changeStock } from '../inventory/inventory.service';
 import type { CreateProductInput, ListProductsQuery, UpdateProductInput } from './products.schema';
 
 export function toProductDto(p: Product) {

@@ -5,7 +5,7 @@ import { AppError } from '../../utils/app-error';
 import { pageResult, paginate } from '../../utils/pagination';
 import { findStockProblems, getCart } from '../cart/cart.service';
 import { processPayment } from '../payments/payments.service';
-import { changeStock } from '../stock/stock.service';
+import { changeStock } from '../inventory/inventory.service';
 import type { CreateOrderInput, ListOrdersQuery } from './orders.schema';
 import { calculateTotals } from './orders.pricing';
 

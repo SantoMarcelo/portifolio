@@ -1,0 +1,66 @@
+{
+  "name": "api-automation-template",
+  "version": "2.0.0",
+  "description": "Reusable API test automation framework (TypeScript, Jest, Zod)",
+  "scripts": {
+    "test": "jest --runInBand",
+    "test:contract": "jest --config jest.contract.js",
+    "test:functional": "jest --config jest.functional.js",
+    "test:document-files": "jest --config jest.document-files.js",
+    "test:all": "npx jest --runInBand --verbose",
+    "generate:tests": "npx ts-node ./src/cli.ts swagger.yaml",
+    "report:load": "npx ts-node src/load-tests/shared/report.ts reports/load",
+    "pipeline:trigger": "./scripts/trigger-pipeline.sh",
+    "pipeline:trigger:qa": "./scripts/trigger-pipeline.sh --env qa",
+    "commit": "cz",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "format": "prettier --write 'src/**/*.ts'",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "ajv": "8.17.1",
+    "axios": "1.6.2",
+    "dotenv": "16.5.0",
+    "exceljs": "^4.4.0",
+    "form-data": "4.0.4",
+    "husky": "9.1.7",
+    "lint-staged": "16.2.7",
+    "lodash": "4.17.21",
+    "stylelint": "17.2.0",
+    "swagger-parser": "10.0.2",
+    "ts-node": "10.9.1",
+    "xlsx": "0.18.5",
+    "yaml": "2.3.1",
+    "zod": "4.1.13"
+  },
+  "devDependencies": {
+    "@types/form-data": "2.2.1",
+    "@types/jest": "29.5.2",
+    "@types/lodash": "4.17.16",
+    "@types/xlsx": "0.0.35",
+    "@typescript-eslint/eslint-plugin": "8.49.0",
+    "@typescript-eslint/parser": "8.49.0",
+    "artillery": "^2.0.30",
+    "commitizen": "4.3.1",
+    "cz-customizable": "7.5.1",
+    "eslint": "9.39.2",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.4",
+    "jest": "29.6.1",
+    "jest-html-reporter": "3.10.2",
+    "prettier": "3.8.1",
+    "ts-jest": "29.1.1",
+    "typescript": "5.2.2"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable",
+      "czConfig": ".cz-config.js"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,mjs,ts,mts,jsx,tsx}": "eslint --max-warnings=0",
+    "src/**/*.style{,s}.ts{,x}": "stylelint"
+  }
+}

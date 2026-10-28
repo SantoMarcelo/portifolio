@@ -43,13 +43,13 @@ const stockErrors = errorResponse('OUT_OF_STOCK (estoque 0) | INSUFFICIENT_STOCK
 export const cartPaths = {
   '/api/v1/cart': {
     get: {
-      tags: ['Carrinho'],
+      tags: ['Cart'],
       summary: 'Carrinho do usuário (criado sob demanda)',
       security: bearer,
       responses: { 200: jsonResponse('Carrinho', ref('Cart')), ...authErrors },
     },
     delete: {
-      tags: ['Carrinho'],
+      tags: ['Cart'],
       summary: 'Limpa o carrinho',
       security: bearer,
       responses: { 204: { description: 'Sem conteúdo' }, ...authErrors },
@@ -57,7 +57,7 @@ export const cartPaths = {
   },
   '/api/v1/cart/items': {
     post: {
-      tags: ['Carrinho'],
+      tags: ['Cart'],
       summary: 'Adiciona item (se já existir, soma a quantidade)',
       security: bearer,
       requestBody: jsonBody(addItemSchema),
@@ -72,7 +72,7 @@ export const cartPaths = {
   },
   '/api/v1/cart/items/{productId}': {
     patch: {
-      tags: ['Carrinho'],
+      tags: ['Cart'],
       summary: 'Define a quantidade de um item',
       security: bearer,
       parameters: [productIdParam],
@@ -86,7 +86,7 @@ export const cartPaths = {
       },
     },
     delete: {
-      tags: ['Carrinho'],
+      tags: ['Cart'],
       summary: 'Remove um item do carrinho',
       security: bearer,
       parameters: [productIdParam],

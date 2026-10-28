@@ -68,7 +68,7 @@ const invalidState = errorResponse('INVALID_ORDER_STATE (somente PAID pode ser c
 export const orderPaths = {
   '/api/v1/checkout/quote': {
     post: {
-      tags: ['Checkout e Pedidos'],
+       tags: ['Orders'],
       summary: 'Revisão: calcula subtotal, desconto, frete e total do carrinho (valida o cupom)',
       description: 'Cupons: PROMO10 (10% do subtotal), FRETEGRATIS (frete zero). Frete: R$ 15,00; grátis se subtotal > R$ 200,00.',
       security: bearer,
@@ -83,7 +83,7 @@ export const orderPaths = {
   },
   '/api/v1/orders': {
     post: {
-      tags: ['Checkout e Pedidos'],
+       tags: ['Orders'],
       summary: 'Confirma o pedido a partir do carrinho (pagamento simulado)',
       description:
         'Cartão final 0000 → aprovado; 1111 → recusado (422, pedido PAYMENT_FAILED); 2222 → indisponível (503, pedido PAYMENT_FAILED); ' +
@@ -101,7 +101,7 @@ export const orderPaths = {
       },
     },
     get: {
-      tags: ['Checkout e Pedidos'],
+       tags: ['Orders'],
       summary: 'Histórico de pedidos do cliente (mais recentes primeiro)',
       security: bearer,
       parameters: [statusParam, ...pageParams],
@@ -110,7 +110,7 @@ export const orderPaths = {
   },
   '/api/v1/orders/{id}': {
     get: {
-      tags: ['Checkout e Pedidos'],
+       tags: ['Orders'],
       summary: 'Detalhe de um pedido do cliente (pedido de outro usuário → 404)',
       security: bearer,
       parameters: [idPathParam],
@@ -119,7 +119,7 @@ export const orderPaths = {
   },
   '/api/v1/orders/{id}/cancel': {
     post: {
-      tags: ['Checkout e Pedidos'],
+       tags: ['Orders'],
       summary: 'Cliente cancela pedido PAID e o estoque é devolvido',
       security: bearer,
       parameters: [idPathParam],
@@ -128,7 +128,7 @@ export const orderPaths = {
   },
   '/api/v1/admin/orders': {
     get: {
-      tags: ['Admin - Pedidos'],
+      tags: ['Admin - Orders'],
       summary: 'Lista todos os pedidos, com filtro por status',
       security: bearer,
       parameters: [statusParam, ...pageParams],
@@ -137,7 +137,7 @@ export const orderPaths = {
   },
   '/api/v1/admin/orders/{id}': {
     get: {
-      tags: ['Admin - Pedidos'],
+      tags: ['Admin - Orders'],
       summary: 'Detalhe de qualquer pedido',
       security: bearer,
       parameters: [idPathParam],
@@ -146,7 +146,7 @@ export const orderPaths = {
   },
   '/api/v1/admin/orders/{id}/cancel': {
     post: {
-      tags: ['Admin - Pedidos'],
+      tags: ['Admin - Orders'],
       summary: 'ADMIN cancela pedido PAID e o estoque é devolvido',
       security: bearer,
       parameters: [idPathParam],

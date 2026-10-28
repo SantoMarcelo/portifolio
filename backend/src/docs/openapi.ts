@@ -3,7 +3,7 @@ import { authPaths, authSchemas } from '../modules/auth/auth.docs';
 import { cartPaths, cartSchemas } from '../modules/cart/cart.docs';
 import { orderPaths, orderSchemas } from '../modules/orders/orders.docs';
 import { productPaths, productSchemas } from '../modules/products/products.docs';
-import { stockPaths, stockSchemas } from '../modules/stock/stock.docs';
+import { stockPaths, stockSchemas } from '../modules/inventory/inventory.docs';
 import { testUtilsPaths } from '../modules/test-utils/test-utils.docs';
 import { errorResponse, jsonResponse } from './helpers';
 
@@ -17,7 +17,7 @@ export const openapi = {
       'Usuários seed: admin@loja.com / Admin@123 (ADMIN) e cliente@loja.com / Cliente@123 (CUSTOMER).',
   },
   servers: [{ url: '/' }],
-  tags: [{ name: 'Health' }, { name: 'Auth' }, { name: 'Vitrine' }, { name: 'Carrinho' }, { name: 'Checkout e Pedidos' }, { name: 'Admin - Produtos' }, { name: 'Admin - Pedidos' }, { name: 'Admin - Estoque' }, ...(isProduction ? [] : [{ name: 'Test utils' }])],
+  tags: [{ name: 'Health' }, { name: 'Auth' }, { name: 'Cart' }, { name: 'Orders' }, { name: 'Admin - Products' }, { name: 'Admin - Orders' }, { name: 'Admin - Inventory' }, ...(isProduction ? [] : [{ name: 'Test utils' }])],
   components: {
     securitySchemes: { bearerAuth: { type: 'http', scheme: 'bearer', bearerFormat: 'JWT' } },
     schemas: {

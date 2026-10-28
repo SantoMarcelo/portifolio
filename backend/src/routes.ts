@@ -6,7 +6,7 @@ import { cartRoutes } from './modules/cart/cart.routes';
 import { adminDashboardRoutes } from './modules/dashboard/dashboard.routes';
 import { adminOrderRoutes, checkoutRoutes, customerOrderRoutes } from './modules/orders/orders.routes';
 import { adminProductRoutes, publicProductRoutes } from './modules/products/products.routes';
-import { adminStockRoutes } from './modules/stock/stock.routes';
+import { adminStockRoutes } from './modules/inventory/inventory.routes';
 
 export const v1Routes = Router();
 
