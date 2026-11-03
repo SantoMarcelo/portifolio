@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marcelo de Oliveira Santos | QA Tech Lead</title>
+    <meta name="description" content="QA Tech Lead com 17 anos em qualidade de software e 10+ anos em automação de testes (E2E, API e Performance), liderança de times e IA aplicada à Engenharia de Qualidade.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { background-color: #f8fafc; color: #334155; overflow-x: hidden; }
+        .glow { background: radial-gradient(circle, rgba(56,189,248,0.18) 0%, rgba(248,250,252,0) 70%); }
+        .card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 4px 16px rgba(15,23,42,0.04); transition: border-color .2s, box-shadow .2s; }
+        .card:hover { border-color: rgba(2,132,199,0.35); box-shadow: 0 8px 24px rgba(2,132,199,0.08); }
+        .text-gradient { background: linear-gradient(135deg, #0284c7 0%, #059669 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .section-desc { font-size: 1rem; line-height: 1.75; color: #475569; text-align: justify; hyphens: auto; }
+        .dash-list li { position: relative; padding-left: 1.25rem; }
+        .dash-list li::before { content: '—'; position: absolute; left: 0; color: #94a3b8; }
+        .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #0284c7; }
+        details > summary { list-style: none; cursor: pointer; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] .chev { transform: rotate(180deg); }
+        .reveal { opacity: 0; transform: translateY(16px); transition: opacity .6s ease, transform .6s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+    </style>
+</head>
+<body class="antialiased selection:bg-sky-200 selection:text-slate-900">
+
+    <div class="fixed -top-40 left-1/4 w-[700px] h-[700px] glow pointer-events-none -z-10"></div>
+
+    <!-- HEADER -->
+    <header class="fixed top-0 inset-x-0 z-50 border-b border-slate-200 bg-white/85 backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <a href="#" class="flex items-center gap-2 font-mono font-bold">
+                <span class="w-9 h-9 border border-slate-300 flex items-center justify-center text-sky-600 text-sm">MS</span>
+                <span class="hidden sm:inline">Marcelo<span class="text-sky-600">.QA</span></span>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-7 text-sm text-slate-600">
+                <a href="#sobre" class="hover:text-sky-600 transition-colors" data-i18n="nav_about">Sobre</a>
+                <a href="#impacto" class="hover:text-sky-600 transition-colors" data-i18n="nav_impact">Impacto</a>
+                <a href="#experiencia" class="hover:text-sky-600 transition-colors" data-i18n="nav_exp">Experiência</a>
+                <a href="#lideranca" class="hover:text-sky-600 transition-colors" data-i18n="nav_lead">Liderança</a>
+                <a href="#projetos" class="hover:text-sky-600 transition-colors" data-i18n="nav_proj">Projetos</a>
+                <a href="#contato" class="hover:text-sky-600 transition-colors" data-i18n="nav_contact">Contato</a>
+            </nav>
+
+            <div class="flex items-center gap-2">
+                <a href="https://github.com/SantoMarcelo" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="hidden sm:flex p-2 text-slate-600 hover:text-sky-600 transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .3a12 12 0 0 0-3.8 23.38c.6.12.83-.26.83-.57v-2.23c-3.34.73-4.04-1.42-4.04-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18a4.65 4.65 0 0 1 1.23 3.22c0 4.61-2.8 5.63-5.48 5.92.42.36.81 1.1.81 2.22v3.29c0 .32.22.7.82.57A12 12 0 0 0 12 .3"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/marcelo-oliveira-santos" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="hidden sm:flex p-2 text-slate-600 hover:text-sky-600 transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+                </a>
+                <a href="assets/cv-marcelo-santos.pdf" download class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 border border-sky-600/50 text-sky-600 text-xs font-semibold hover:bg-sky-600 hover:text-white transition-colors">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i><span>CV</span>
+                </a>
+                <div class="flex border border-slate-200 text-[11px] font-mono font-bold" role="group" aria-label="Idioma">
+                    <button type="button" data-lang="pt" class="lang-btn px-2.5 py-1.5">PT</button>
+                    <button type="button" data-lang="en" class="lang-btn px-2.5 py-1.5">EN</button>
+                </div>
+                <button id="mobile-menu-btn" aria-label="Abrir menu" class="md:hidden p-2 text-slate-700">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-6 py-3 flex-col text-sm text-slate-700">
+            <a href="#sobre" class="py-2 mobile-link" data-i18n="nav_about">Sobre</a>
+            <a href="#impacto" class="py-2 mobile-link" data-i18n="nav_impact">Impacto</a>
+            <a href="#experiencia" class="py-2 mobile-link" data-i18n="nav_exp">Experiência</a>
+            <a href="#lideranca" class="py-2 mobile-link" data-i18n="nav_lead">Liderança</a>
+            <a href="#projetos" class="py-2 mobile-link" data-i18n="nav_proj">Projetos</a>
+            <a href="#contato" class="py-2 mobile-link" data-i18n="nav_contact">Contato</a>
+            <a href="assets/cv-marcelo-santos.pdf" download class="py-2 text-sky-600 mobile-link" data-i18n="cv">Baixar CV</a>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- 1. HERO -->
+        <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-14">
+            <div class="flex flex-col-reverse md:flex-row md:items-center gap-10 md:gap-14">
+                <div class="flex-1">
+                    <p class="eyebrow" data-i18n="h_role">QA Tech Lead · Quality Engineering &amp; IA aplicada a QA</p>
+                    <h1 class="mt-3 text-slate-900 text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.05]">
+                        Marcelo de Oliveira <span class="text-gradient">Santos</span>
+                    </h1>
+                    <p class="mt-6 text-lg sm:text-2xl text-slate-800 leading-snug max-w-2xl font-medium" data-i18n="h_pitch">
+                        Transformo a qualidade em vantagem competitiva: ajudo times a entregar software melhor, implanto práticas de QA e uso IA para acelerar testes e desenvolvimento.
+                    </p>
+                    <p class="mt-4 text-slate-600 max-w-2xl leading-relaxed" data-i18n="h_sub">
+                        17 anos em qualidade de software e 10+ anos em automação (E2E, API e Performance), hoje em projetos internacionais para um grande fabricante norte-americano.
+                    </p>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <a href="assets/cv-marcelo-santos.pdf" download class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-sky-600 to-emerald-600 text-white font-semibold text-sm hover:opacity-90 transition-opacity">
+                            <i data-lucide="download" class="w-4 h-4"></i><span data-i18n="cv">Baixar CV</span>
+                        </a>
+                        <a href="#contato" class="inline-flex items-center gap-2 px-6 py-3 border border-slate-300 text-slate-700 text-sm hover:border-sky-600 hover:text-sky-600 transition-colors">
+                            <i data-lucide="message-square" class="w-4 h-4"></i><span data-i18n="h_cta2">Falar comigo</span>
+                        </a>
+                    </div>
+                    <p class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-500">
+                        <span class="inline-flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4"></i><span data-i18n="h_loc">Santa Catarina, Brasil</span></span>
+                        <span class="inline-flex items-center gap-1.5"><i data-lucide="languages" class="w-4 h-4"></i><span data-i18n="h_langs">Português · Inglês · Espanhol</span></span>
+                    </p>
+                </div>
+
+                <!-- Foto: versão otimizada de /profile/Profile-2024.jpg (fora de docs/). Se não carregar, exibe as iniciais. -->
+                <div class="relative w-40 h-40 sm:w-56 sm:h-56 md:w-72 md:h-72 shrink-0 self-start md:self-center">
+                    <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-sky-400/40 to-emerald-600/40 rotate-6"></div>
+                    <div class="absolute inset-0 rounded-3xl bg-white border border-slate-300 overflow-hidden flex items-center justify-center">
+                        <span class="font-mono text-5xl md:text-7xl font-bold text-gradient">MS</span>
+                        <img src="assets/profile.jpg" alt="Marcelo de Oliveira Santos" width="800" height="800" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. PILARES DO PERFIL -->
+        <section class="border-y border-slate-200 bg-slate-100/70">
+            <ul class="max-w-6xl mx-auto px-4 sm:px-6 py-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <li class="card rounded-2xl p-6">
+                    <div class="flex items-center gap-3 min-h-[3rem]">
+                        <span class="w-10 h-10 shrink-0 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center"><i data-lucide="shield-check" class="w-5 h-5"></i></span>
+                        <h3 class="text-base font-bold text-slate-900 leading-snug" data-i18n="pl1_title">17 anos na área de qualidade</h3>
+                    </div>
+                    <p class="mt-4 text-sm text-slate-600 leading-relaxed text-justify hyphens-auto" data-i18n="pl1_desc">Desde 2009, da execução de testes à liderança técnica de QA.</p>
+                </li>
+                <li class="card rounded-2xl p-6">
+                    <div class="flex items-center gap-3 min-h-[3rem]">
+                        <span class="w-10 h-10 shrink-0 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><i data-lucide="globe" class="w-5 h-5"></i></span>
+                        <h3 class="text-base font-bold text-slate-900 leading-snug" data-i18n="pl2_title">Projetos nacionais e internacionais</h3>
+                    </div>
+                    <p class="mt-4 text-sm text-slate-600 leading-relaxed text-justify hyphens-auto" data-i18n="pl2_desc">Indústria norte-americana, setor financeiro, agronegócio e telecom, entregando com qualidade alinhada ao negócio.</p>
+                </li>
+                <li class="card rounded-2xl p-6">
+                    <div class="flex items-center gap-3 min-h-[3rem]">
+                        <span class="w-10 h-10 shrink-0 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center"><i data-lucide="users" class="w-5 h-5"></i></span>
+                        <h3 class="text-base font-bold text-slate-900 leading-snug" data-i18n="pl3_title">Liderança de equipes multidisciplinares</h3>
+                    </div>
+                    <p class="mt-4 text-sm text-slate-600 leading-relaxed text-justify hyphens-auto" data-i18n="pl3_desc">Construção de times de alta performance, liderança de chapters de qualidade, evolução profissional e mentorias.</p>
+                </li>
+                <li class="card rounded-2xl p-6">
+                    <div class="flex items-center gap-3 min-h-[3rem]">
+                        <span class="w-10 h-10 shrink-0 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center"><i data-lucide="blocks" class="w-5 h-5"></i></span>
+                        <h3 class="text-base font-bold text-slate-900 leading-snug" data-i18n="pl4_title">Frameworks de automação robustos e modulares</h3>
+                    </div>
+                    <p class="mt-4 text-sm text-slate-600 leading-relaxed text-justify hyphens-auto" data-i18n="pl4_desc">E2E, API e performance, com arquitetura adotada como padrão em +20 projetos.</p>
+                </li>
+            </ul>
+        </section>
+
+        <!-- SOBRE -->
+        <section id="sobre" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 scroll-mt-16">
+            <div class="mb-10 reveal">
+                <p class="eyebrow" data-i18n="t7">Sobre Mim</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-slate-900" data-i18n="t8">Estratégia de qualidade, automação sólida e liderança de pessoas.</h2>
+            </div>
+            <div class="grid lg:grid-cols-12 gap-6 items-start">
+                <div class="lg:col-span-7 card rounded-2xl p-6 sm:p-8 space-y-4 reveal">
+                    <p class="section-desc" data-i18n="t9a">Como <strong class="text-slate-900">QA Tech Lead &amp; SDET</strong>, atuo na interseção entre excelência técnica, eficiência operacional e desenvolvimento de talentos. Tenho 17 anos de experiência em qualidade de software, ajudando empresas globais a transformar e acelerar a entrega de software através da Engenharia de Qualidade moderna.</p>
+                    <p class="section-desc" data-i18n="t9b">Especialista na construção de frameworks escaláveis de automação (Web, API REST e Performance) e na integração contínua em pipelines CI/CD, implemento soluções que cobrem todo o ciclo de vida da aplicação — desde a descoberta até a produção.</p>
+                    <p class="section-desc" data-i18n="t9c">Como líder, foco em unificar processos em múltiplos squads, mentorar equipes multidisciplinares e impulsionar a inovação com <strong class="text-sky-600">Agentes de IA Generativa</strong> para eliminar gargalos repetitivos e gerar valor real para o negócio.</p>
+                </div>
+                <div class="lg:col-span-5 space-y-4 reveal">
+                    <div class="card rounded-2xl p-6 border-l-4 !border-l-sky-600">
+                        <p class="flex items-center gap-3 font-semibold text-slate-900"><i data-lucide="target" class="w-5 h-5 text-sky-600"></i><span data-i18n="t17">Qualidade alinhada ao negócio</span></p>
+                        <p class="mt-3 text-sm text-slate-600 leading-relaxed text-justify hyphens-auto" data-i18n="t18">Alinho a estratégia de QA aos objetivos do negócio, com comunicação clara e transparente entre times de engenharia, stakeholders e alta gestão.</p>
+                    </div>
+                    <div class="card rounded-2xl p-6 border-l-4 !border-l-emerald-600">
+                        <p class="flex items-center gap-3 font-semibold text-slate-900"><i data-lucide="users" class="w-5 h-5 text-emerald-600"></i><span data-i18n="t19">Pessoas e mentoria</span></p>
+                        <p class="mt-3 text-sm text-slate-600 leading-relaxed text-justify hyphens-auto" data-i18n="t20">Foco em empoderar pessoas e desenvolver talentos: 1:1 regulares, trilhas de crescimento e critérios objetivos de avaliação técnica por senioridade.</p>
+                    </div>
+                    <div class="card rounded-2xl p-6 border-l-4 !border-l-sky-600">
+                        <p class="flex items-center gap-3 font-semibold text-slate-900"><i data-lucide="languages" class="w-5 h-5 text-sky-600"></i><span data-i18n="t21">Idiomas</span></p>
+                        <p class="mt-3 text-sm text-slate-600 leading-relaxed text-justify hyphens-auto" data-i18n="t22">Português nativo, inglês no dia a dia com cliente dos EUA e espanhol intermediário.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. CASES DE IMPACTO -->
+        <section id="impacto" class="max-w-6xl mx-auto px-4 sm:px-6 py-20 scroll-mt-16">
+            <div class="mb-10 reveal">
+                <p class="eyebrow" data-i18n="c_eyebrow">Cases de impacto</p>
+                <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-slate-900" data-i18n="c_title">Problemas reais, resultados medidos.</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <article class="card rounded-2xl p-6 sm:p-7 flex flex-col reveal">
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono text-xs text-sky-600" data-i18n="c1_tag">Estratégia de testes</span>
+                        <i data-lucide="triangle" class="w-5 h-5 text-slate-500"></i>
+                    </div>
+                    <h3 class="mt-3 text-xl font-bold text-slate-900" data-i18n="c1_title">Rebalanceamento da pirâmide de testes</h3>
+                    <dl class="mt-5 space-y-3 text-sm flex-1">
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_p">Problema</dt><dd class="text-slate-700" data-i18n="c1_p">Mais de 4 mil testes E2E e menos de 2 mil unitários: suíte lenta e frágil.</dd></div>
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_a">Ação</dt><dd class="text-slate-700" data-i18n="c1_a">Migração para +4 mil unitários, ~500 E2E e +300 novos testes de API.</dd></div>
+                    </dl>
+                    <div class="mt-6 pt-5 border-t border-slate-200 flex items-end justify-between">
+                        <div><p class="font-mono text-[11px] uppercase tracking-wider text-slate-500" data-i18n="lbl_r">Resultado</p><p class="font-mono text-2xl font-bold text-emerald-600" data-i18n="c1_r">+20% de cobertura</p></div>
+                        <span class="text-xs text-slate-500">Venturus</span>
+                    </div>
+                </article>
+
+                <article class="card rounded-2xl p-6 sm:p-7 flex flex-col reveal">
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono text-xs text-sky-600">CI/CD</span>
+                        <i data-lucide="timer" class="w-5 h-5 text-slate-500"></i>
+                    </div>
+                    <h3 class="mt-3 text-xl font-bold text-slate-900" data-i18n="c2_title">Pipelines E2E 7x mais rápidas</h3>
+                    <dl class="mt-5 space-y-3 text-sm flex-1">
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_p">Problema</dt><dd class="text-slate-700" data-i18n="c2_p">A suíte E2E levava cerca de 4 horas para dar feedback ao time.</dd></div>
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_a">Ação</dt><dd class="text-slate-700" data-i18n="c2_a">Reestruturação com paralelização em pipelines dedicadas e configuração completa do ambiente.</dd></div>
+                    </dl>
+                    <div class="mt-6 pt-5 border-t border-slate-200 flex items-end justify-between">
+                        <div><p class="font-mono text-[11px] uppercase tracking-wider text-slate-500" data-i18n="lbl_r">Resultado</p><p class="font-mono text-2xl font-bold text-emerald-600">~4h → ~35min</p></div>
+                        <span class="text-xs text-slate-500">Venturus</span>
+                    </div>
+                </article>
+
+                <article class="card rounded-2xl p-6 sm:p-7 flex flex-col reveal">
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono text-xs text-sky-600">Swagger / OpenAPI</span>
+                        <i data-lucide="zap" class="w-5 h-5 text-slate-500"></i>
+                    </div>
+                    <h3 class="mt-3 text-xl font-bold text-slate-900" data-i18n="c3_title">Gerador de testes de API</h3>
+                    <dl class="mt-5 space-y-3 text-sm flex-1">
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_p">Problema</dt><dd class="text-slate-700" data-i18n="c3_p">Projeto sem testes de API automatizados; bugs críticos passavam pelos testes manuais.</dd></div>
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_a">Ação</dt><dd class="text-slate-700" data-i18n="c3_a">Framework que lê a documentação das APIs e gera a estrutura de testes, com health check e contrato (Jest + TypeScript).</dd></div>
+                    </dl>
+                    <div class="mt-6 pt-5 border-t border-slate-200 flex items-end justify-between">
+                        <div><p class="font-mono text-[11px] uppercase tracking-wider text-slate-500" data-i18n="lbl_r">Resultado</p><p class="font-mono text-2xl font-bold text-emerald-600" data-i18n="c3_r">+400 testes · +20 bugs críticos</p></div>
+                        <span class="text-xs text-slate-500">Venturus</span>
+                    </div>
+                </article>
+
+                <article class="card rounded-2xl p-6 sm:p-7 flex flex-col reveal">
+                    <div class="flex items-center justify-between">
+                        <span class="font-mono text-xs text-sky-600" data-i18n="c4_tag">IA aplicada a QA</span>
+                        <i data-lucide="sparkles" class="w-5 h-5 text-slate-500"></i>
+                    </div>
+                    <h3 class="mt-3 text-xl font-bold text-slate-900" data-i18n="c4_title">Agentes de IA em todo o ciclo de QA</h3>
+                    <dl class="mt-5 space-y-3 text-sm flex-1">
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_p">Problema</dt><dd class="text-slate-700" data-i18n="c4_p">Critérios de aceite, casos de teste, UAT e scripts consumiam boa parte do tempo do time.</dd></div>
+                        <div class="flex gap-3"><dt class="w-20 shrink-0 font-mono text-[11px] uppercase tracking-wider text-slate-500 pt-0.5" data-i18n="lbl_a">Ação</dt><dd class="text-slate-700" data-i18n="c4_a">Workflow com skills e agentes de IA criado do zero, incluindo um agente que analisa e corrige falhas em pipelines.</dd></div>
+                    </dl>
+                    <div class="mt-6 pt-5 border-t border-slate-200 flex items-end justify-between">
+                        <div><p class="font-mono text-[11px] uppercase tracking-wider text-slate-500" data-i18n="lbl_r">Resultado</p><p class="font-mono text-2xl font-bold text-emerald-600" data-i18n="c4_r">−80% de tempo repetitivo</p></div>
+                        <span class="text-xs text-slate-500">Venturus</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 4. EXPERIÊNCIA -->
+        <section id="experiencia" class="border-t border-slate-200 scroll-mt-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+                <div class="mb-10 reveal">
+                    <p class="eyebrow" data-i18n="nav_exp">Experiência</p>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-slate-900" data-i18n="e_title">Da execução de testes à liderança de qualidade.</h2>
+                </div>
+
+                <div class="max-w-4xl relative ml-1.5 border-l border-slate-200">
+                    <div class="relative pl-8 sm:pl-12 pb-14 last:pb-0 reveal">
+                        <span class="absolute left-0 top-2 w-3.5 h-3.5 -translate-x-1/2 rounded-full bg-sky-600 ring-4 ring-sky-100"></span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900" data-i18n="t23">Venturus</h3>
+                        <p class="mt-2 flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t24">Ago 2022 — Atual</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2022-08" data-end=""></span></p>
+                        <p class="mt-5 pl-4 border-l-2 border-sky-600 text-slate-700 leading-relaxed max-w-3xl" data-i18n="t25">Atuação como consultor da Venturus para um grande fabricante norte-americano, em projetos internacionais de gestão de manufatura.</p>
+                        <div class="mt-8 ml-1 border-l border-slate-200">
+                            <div class="relative pl-6 sm:pl-8 pb-10 last:pb-0">
+                                <span class="absolute left-0 top-1.5 w-2.5 h-2.5 -translate-x-1/2 rounded-full bg-sky-600"></span>
+                                <p class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t26">Set 2025 — Atual</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2025-09" data-end=""></span></p>
+                                <h4 class="mt-2 text-lg font-semibold text-sky-700" data-i18n="t27">Líder Técnico de QA · 2 projetos de alta complexidade</h4>
+                                <p class="mt-1 text-xs text-slate-500" data-i18n="t28">Florianópolis</p>
+                                <p class="mt-4 text-sm text-slate-700 leading-relaxed max-w-3xl" data-i18n="t29">Convidado a gerenciar 2 projetos de alta complexidade, deixei o projeto inicial e passei a liderar 5 analistas de qualidade, com foco em automação, estratégia de testes e IA aplicada a QA.</p>
+                                <p class="mt-6 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500" data-i18n="t30">Automação e estratégia de testes</p>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t31">Framework que lê a documentação das APIs e gera a estrutura de automação, com testes de health check e de contrato (Jest + TypeScript): de 0 para <strong class="text-emerald-600 font-bold">+400 testes de API</strong> e <strong class="text-emerald-600 font-bold">+20 bugs críticos</strong> que os testes manuais não detectaram.</li>
+                                    <li data-i18n="t32">Rebalanceei a pirâmide de testes: de +4 mil testes E2E e &lt;2 mil unitários para +4 mil unitários e ~500 E2E, além de +300 testes de API criados. Essa movimentação aumentou a cobertura geral do projeto em <strong class="text-emerald-600 font-bold">+20%</strong>.</li>
+                                    <li data-i18n="t33">Reestruturei as pipelines E2E com paralelização em pipelines dedicadas e configurei todo o ambiente: tempo de execução de <strong class="text-emerald-600 font-bold">~4h para ~35min</strong>.</li>
+                                    <li data-i18n="t34">Implementei um framework de criação de scripts de testes de performance de APIs com Artillery, com mais de 100 scripts.</li>
+                                </ul>
+                                <p class="mt-6 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500" data-i18n="t35">IA no workflow de QA</p>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t36">Workflow com skills e agentes de IA implantado do zero para o dia a dia de QA: critérios de aceite, casos de teste, documentação de UAT, scripts de automação de front-end e back-end e análise de gaps de cobertura. Resultado: <strong class="text-emerald-600 font-bold">redução de 80%</strong> no tempo das atividades repetitivas.</li>
+                                    <li data-i18n="t36b">Agente de análise de falhas em pipelines: identifica a causa, corrige os testes e sobe a correção para a pipeline.</li>
+                                    <li data-i18n="t36c">Agentes de testes exploratórios e guiados, análise de defeitos escapados, estimativas de QA com base em histórico e ações corretivas para bugs abertos por usuários externos.</li>
+                                </ul>
+                                <p class="mt-6 font-mono text-[11px] font-bold uppercase tracking-[0.2em] text-slate-500" data-i18n="t37">Impacto organizacional · comunidade de ~80 QAs</p>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t38">Liderei a implantação de testes de performance com JMeter: +150 cenários, que deram segurança ao time na migração de um sistema legado para um novo.</li>
+                                    <li data-i18n="t39">Ministrei 2 treinamentos sobre testes de API, do conceito à implementação de testes automatizados com Playwright + TypeScript.</li>
+                                    <li data-i18n="t40">Reestruturei a avaliação técnica de todos os analistas de QA da empresa: de <strong class="text-emerald-600 font-bold">36 para 17 critérios</strong>, com descrições refinadas e pesos mínimos por senioridade. Feedback muito positivo de gerentes e analistas, com elogios à clareza.</li>
+                                    <li data-i18n="t41">Implementei uma reunião quinzenal de compartilhamento de conhecimento, boas práticas e IA, impactando mais de 35 analistas de qualidade do cliente.</li>
+                                    <li data-i18n="t42">Liderei uma iniciativa de 2 dias em que <strong class="text-emerald-600 font-bold">36 analistas de QA</strong> criaram soluções de IA para o dia a dia dos projetos: organizei temas, acompanhamento diário, entregas e apresentação dos resultados aos gerentes.</li>
+                                </ul>
+                                <div class="mt-5 flex flex-wrap gap-2" data-i18n="t43"><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Estratégia de testes</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Pirâmide de testes</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">CI/CD</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Artillery</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">JMeter</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Jest</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Playwright</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">IA aplicada a QA</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Gestão de equipes</span></div>
+                            </div>
+                            <div class="relative pl-6 sm:pl-8 pb-10 last:pb-0">
+                                <span class="absolute left-0 top-1.5 w-2.5 h-2.5 -translate-x-1/2 rounded-full bg-white border-2 border-slate-300"></span>
+                                <p class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t44">Ago 2022 — Set 2025</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2022-08" data-end="2025-09"></span></p>
+                                <h4 class="mt-2 text-lg font-semibold text-sky-700" data-i18n="t45">Líder Técnico de QA · 1 projeto</h4>
+                                <p class="mt-1 text-xs text-slate-500" data-i18n="t46">Florianópolis</p>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t47">Liderei um time de 4 analistas de qualidade, responsável por implementar os fluxos e processos de qualidade e por evoluir profissionalmente cada integrante.</li>
+                                    <li data-i18n="t48">Estruturei o framework de automação de testes: suíte E2E de front-end com Cypress + TypeScript e testes de API em TypeScript com Jest.</li>
+                                    <li data-i18n="t49">Conduzi o desenvolvimento do time: <strong class="text-emerald-600 font-bold">3 promoções</strong> entre os liderados (estagiário → júnior, júnior → pleno, pleno → sênior).</li>
+                                    <li data-i18n="t50">Apresentei as demonstrações de software a stakeholders, em inglês, ao final de cada sprint.</li>
+                                    <li data-i18n="t51">Em 3 anos de liderança, mantive a taxa de incidentes em produção próxima de zero.</li>
+                                </ul>
+                                <div class="mt-5 flex flex-wrap gap-2" data-i18n="t52"><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Liderança técnica</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Cypress</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">TypeScript</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Jest</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Testes de API</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Gestão de equipes</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Inglês</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative pl-8 sm:pl-12 pb-14 last:pb-0 reveal">
+                        <span class="absolute left-0 top-2 w-3.5 h-3.5 -translate-x-1/2 rounded-full bg-sky-600 ring-4 ring-sky-100"></span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900" data-i18n="t53">Cooperativa Central Ailos</h3>
+                        <p class="mt-2 flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t54">Dez 2020 — Ago 2022</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2020-12" data-end="2022-08"></span></p>
+                        <div class="mt-8 ml-1 border-l border-slate-200">
+                            <div class="relative pl-6 sm:pl-8 pb-10 last:pb-0">
+                                <span class="absolute left-0 top-1.5 w-2.5 h-2.5 -translate-x-1/2 rounded-full bg-sky-600"></span>
+                                <p class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t55">Dez 2020 — Ago 2022</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2020-12" data-end="2022-08"></span></p>
+                                <h4 class="mt-2 text-lg font-semibold text-sky-700" data-i18n="t56">Test Automation Lead / QA Tech Lead</h4>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t57">Construí e escalei um time de QA do zero: recrutamento, onboarding, definição de fluxo, gestão de tarefas e crescimento profissional com 1:1.</li>
+                                    <li data-i18n="t58">Projetei um framework de automação modular para E2E e REST API, com arquitetura que facilita migrações, adotado como padrão em mais de 20 projetos.</li>
+                                    <li data-i18n="t59">Fui membro do Comitê Corporativo de Qualidade: estratégias de qualidade, modelos operacionais de QA e processos de RFP para seleção de fornecedores.</li>
+                                    <li data-i18n="t60">Implantei padrões de teste e cultura de qualidade que influenciaram e apoiaram mais de 60 squads.</li>
+                                </ul>
+                                <div class="mt-5 flex flex-wrap gap-2" data-i18n="t61"><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">E2E</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">REST API</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Frameworks</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Governança de QA</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Gestão de Times</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">RFP</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative pl-8 sm:pl-12 pb-14 last:pb-0 reveal">
+                        <span class="absolute left-0 top-2 w-3.5 h-3.5 -translate-x-1/2 rounded-full bg-sky-600 ring-4 ring-sky-100"></span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900" data-i18n="t62">Agriness</h3>
+                        <p class="mt-2 flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t63">Out 2019 — Dez 2020</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2019-10" data-end="2020-12"></span></p>
+                        <div class="mt-8 ml-1 border-l border-slate-200">
+                            <div class="relative pl-6 sm:pl-8 pb-10 last:pb-0">
+                                <span class="absolute left-0 top-1.5 w-2.5 h-2.5 -translate-x-1/2 rounded-full bg-sky-600"></span>
+                                <p class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t64">Out 2019 — Dez 2020</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2019-10" data-end="2020-12"></span></p>
+                                <h4 class="mt-2 text-lg font-semibold text-sky-700" data-i18n="t65">Software Test Analyst</h4>
+                                <p class="mt-1 text-xs text-slate-500" data-i18n="t66">Florianópolis, Brasil</p>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t67">Atuei como QA Mobile, cuidando da qualidade dos aplicativos da empresa, do planejamento à release e produção.</li>
+                                    <li data-i18n="t68">Fui responsável pelo projeto de Performance: scripts automatizados, execução integrada ao CI/CD e relatórios analíticos para identificar gargalos.</li>
+                                    <li data-i18n="t69">Com o QA Chapter, implantei frameworks de automação para APIs REST e UI, contribuindo para práticas de testes contínuos nas squads ágeis.</li>
+                                </ul>
+                                <div class="mt-5 flex flex-wrap gap-2" data-i18n="t70"><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Mobile QA</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Performance</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">CI/CD</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">REST API</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">QA Chapter</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Agile</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative pl-8 sm:pl-12 pb-14 last:pb-0 reveal">
+                        <span class="absolute left-0 top-2 w-3.5 h-3.5 -translate-x-1/2 rounded-full bg-sky-600 ring-4 ring-sky-100"></span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900" data-i18n="t71">InPhonex</h3>
+                        <p class="mt-2 flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t72">Fev 2016 — Set 2019</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2016-02" data-end="2019-09"></span></p>
+                        <div class="mt-8 ml-1 border-l border-slate-200">
+                            <div class="relative pl-6 sm:pl-8 pb-10 last:pb-0">
+                                <span class="absolute left-0 top-1.5 w-2.5 h-2.5 -translate-x-1/2 rounded-full bg-sky-600"></span>
+                                <p class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t73">Fev 2016 — Set 2019</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2016-02" data-end="2019-09"></span></p>
+                                <h4 class="mt-2 text-lg font-semibold text-sky-700" data-i18n="t74">Senior Test Analyst</h4>
+                                <p class="mt-1 text-xs text-slate-500" data-i18n="t75">Florianópolis</p>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t76">Desenvolvi e mantive suítes de teste manuais e automatizadas (E2E e REST API) para plataformas de Telecom e VoIP.</li>
+                                    <li data-i18n="t77">Preparei e gerenciei ambientes de teste, incluindo centrais telefônicas IPBX e PBX em nuvem.</li>
+                                    <li data-i18n="t78">Executei testes de integração entre software desktop, softphones e hardware IPBX físico e virtual, além de coletar e analisar métricas de qualidade.</li>
+                                </ul>
+                                <div class="mt-5 flex flex-wrap gap-2" data-i18n="t79"><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">E2E</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">REST API</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">VoIP / Telecom</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">IPBX</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Integração</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Métricas de QA</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative pl-8 sm:pl-12 pb-14 last:pb-0 reveal">
+                        <span class="absolute left-0 top-2 w-3.5 h-3.5 -translate-x-1/2 rounded-full bg-sky-600 ring-4 ring-sky-100"></span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-900" data-i18n="t80">AytyCRM</h3>
+                        <p class="mt-2 flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t81">Out 2009 — Jan 2016</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2009-10" data-end="2016-01"></span></p>
+                        <div class="mt-8 ml-1 border-l border-slate-200">
+                            <div class="relative pl-6 sm:pl-8 pb-10 last:pb-0">
+                                <span class="absolute left-0 top-1.5 w-2.5 h-2.5 -translate-x-1/2 rounded-full bg-sky-600"></span>
+                                <p class="flex flex-wrap items-center gap-2 font-mono text-xs text-slate-500"><span data-i18n="t82">Out 2009 — Jan 2016</span><span class="px-2 py-0.5 rounded bg-sky-50 text-sky-700 text-[11px]" data-duration data-start="2009-10" data-end="2016-01"></span></p>
+                                <h4 class="mt-2 text-lg font-semibold text-sky-700" data-i18n="t83">Test Lead / Quality Analyst</h4>
+                                <p class="mt-1 text-xs text-slate-500" data-i18n="t84">Florianópolis, Santa Catarina, Brasil</p>
+                                <ul class="dash-list mt-4 space-y-2.5 text-sm text-slate-700 leading-relaxed max-w-3xl">
+                                    <li data-i18n="t85">Liderei os testes de CRMs desktop, discadores IPBX e portais web.</li>
+                                    <li data-i18n="t86">Conduzi testes de aceitação, regressão, stress/performance e white-box, e desenhei casos e cenários de teste.</li>
+                                    <li data-i18n="t87">Preparei ambientes de teste e homologação (UAT) e produzi relatórios de bugs, análises de defeitos e métricas de execução.</li>
+                                    <li data-i18n="t88">Fui responsável por QA e testes de release de software distribuído internacionalmente.</li>
+                                </ul>
+                                <div class="mt-5 flex flex-wrap gap-2" data-i18n="t89"><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Regressão</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Performance</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">White-box</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">UAT</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Test Design</span><span class="px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono">Defect Analysis</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. LIDERANÇA & PESSOAS -->
+        <section id="lideranca" class="border-t border-slate-200 bg-slate-100/70 scroll-mt-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+                <div class="mb-10 reveal">
+                    <p class="eyebrow" data-i18n="l_eyebrow">Liderança &amp; Pessoas</p>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-slate-900" data-i18n="l_title">Desenvolvo pessoas e escalo práticas de qualidade.</h2>
+                    <p class="section-desc mt-4" data-i18n="l_sub">Desenvolvo pessoas compartilhando conhecimento e direcionando o aprendizado conforme a necessidade de cada uma. Acompanho a evolução profissional com 1:1 e feedbacks constantes, e atribuo responsabilidades progressivas que preparam cada pessoa para o próximo nível da carreira.</p>
+                </div>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="card rounded-xl p-5 reveal"><p class="text-slate-700 leading-relaxed"><span class="font-mono text-2xl font-bold text-emerald-600 mr-1">3</span> <span data-i18n="l1">promoções conduzidas entre liderados diretos</span></p></div>
+                    <div class="card rounded-xl p-5 reveal"><p class="text-slate-700 leading-relaxed"><span class="font-mono text-2xl font-bold text-emerald-600 mr-1">36 → 17</span> <span data-i18n="l2">critérios na nova matriz de avaliação técnica de QA da empresa</span></p></div>
+                    <div class="card rounded-xl p-5 reveal"><p class="text-slate-700 leading-relaxed"><span class="font-mono text-2xl font-bold text-emerald-600 mr-1">36</span> <span data-i18n="l3">QAs em uma iniciativa de 2 dias criando soluções de IA para os projetos</span></p></div>
+                    <div class="card rounded-xl p-5 reveal"><p class="text-slate-700 leading-relaxed"><span class="font-mono text-2xl font-bold text-emerald-600 mr-1">35+</span> <span data-i18n="l4">analistas em encontros quinzenais de boas práticas e IA</span></p></div>
+                    <div class="card rounded-xl p-5 reveal"><p class="text-slate-700 leading-relaxed"><span class="font-mono text-2xl font-bold text-emerald-600 mr-1">2</span> <span data-i18n="l5">treinamentos de testes de API com Playwright + TypeScript</span></p></div>
+                    <div class="card rounded-xl p-5 reveal"><p class="text-slate-700 leading-relaxed"><span class="font-mono text-2xl font-bold text-emerald-600 mr-1">60+</span> <span data-i18n="l6">squads apoiadas por padrões de teste e cultura de qualidade</span></p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. COMPETÊNCIAS -->
+        <section id="stack" class="border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+                <div class="mb-10 reveal">
+                    <p class="eyebrow" data-i18n="t90">Stack tecnológica</p>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-slate-900" data-i18n="t91">Tecnologias e práticas que uso no dia a dia.</h2>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4" id="tech-grid">
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="play" class="w-7 h-7 text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t98">Automation E2E Testing</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t99">Cypress, Playwright, Selenium</span>
+                    </div>
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="plug" class="w-7 h-7 text-sky-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t100">REST API</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t101">Postman, SoapUI, Jest, REST Assured, RestSharp</span>
+                    </div>
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="layers" class="w-7 h-7 text-blue-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t108">Automation Frameworks</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t109">Modulares e escaláveis</span>
+                    </div>
+                    <div class="tech-item lg:col-span-2 card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="code" class="w-7 h-7 text-amber-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t106">Programming Languages</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t107">TypeScript, JavaScript, Java, C#, Ruby, Python</span>
+                    </div>
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="bot" class="w-7 h-7 text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t124">Skills &amp; Agentes de IA</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t125">IA aplicada a QA</span>
+                    </div>
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="sparkles" class="w-7 h-7 text-purple-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t126">IA Generativa</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t127">Cenários &amp; scripts</span>
+                    </div>
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="git-branch" class="w-7 h-7 text-sky-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t122">CI/CD</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t123">Continuous Testing</span>
+                    </div>
+                    <div class="tech-item lg:col-span-2 card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="gauge" class="w-7 h-7 text-purple-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t118">Performance</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t119">JMeter, K6, Artillery, Lighthouse</span>
+                    </div>
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="smartphone" class="w-7 h-7 text-sky-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t120">Mobile QA</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t121">Appium, BrowserStack</span>
+                    </div>
+                    <div class="tech-item card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="award" class="w-7 h-7 text-sky-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t128">QA Chapter</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t129">Governança &amp; estratégia</span>
+                    </div>
+                    <div class="tech-item lg:col-span-2 card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="users" class="w-7 h-7 text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t130">Gestão de Times</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t131">Times de alta performance &amp; evolução profissional</span>
+                    </div>
+                    <div class="tech-item lg:col-span-2 card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="clipboard-check" class="w-7 h-7 text-amber-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t132">Estratégia de QA</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t133">Qualidade alinhada ao negócio em todos os níveis</span>
+                    </div>
+                    <div class="tech-item lg:col-span-2 card p-4 rounded-xl flex flex-col items-center justify-center text-center gap-2 group hover:scale-105 transition-transform">
+                        <i data-lucide="list-checks" class="w-7 h-7 text-emerald-600 group-hover:scale-110 transition-transform"></i>
+                        <span class="text-sm font-semibold text-slate-800" data-i18n="t104">Técnicas de Teste</span>
+                        <span class="text-[11px] text-slate-500 font-mono leading-snug" data-i18n="t105">BDD, TDD, caixa branca/preta, funcional e não funcional</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. PROJETOS -->
+        <section id="projetos" class="border-t border-slate-200 scroll-mt-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+                <div class="mb-10 reveal">
+                    <p class="eyebrow" data-i18n="nav_proj">Projetos</p>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-slate-900" data-i18n="p_title">Código aberto para você avaliar.</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <a href="https://github.com/SantoMarcelo/portifolio" target="_blank" rel="noopener noreferrer" class="md:col-span-2 card rounded-2xl p-6 sm:p-8 group reveal">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-emerald-600" data-i18n="p0_tag">Projeto em destaque · Full stack + QA</span>
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-sky-600 transition-colors"></i>
+                        </div>
+                        <h3 class="mt-3 text-2xl font-bold text-slate-900 group-hover:text-sky-600 transition-colors" data-i18n="p0_title">Loja QA: e-commerce construído para ser testado</h3>
+                        <p class="mt-3 text-slate-600 leading-relaxed max-w-3xl" data-i18n="p0_desc">Sistema completo (Node.js + Express + Prisma e React + Vite) criado como alvo de testes automatizados, com BRD, critérios de aceite em Gherkin, casos de teste, Swagger/OpenAPI, testes unitários e de API.</p>
+                        <p class="mt-5 font-mono text-xs text-slate-500">SantoMarcelo/portifolio</p>
+                    </a>
+                    <a href="https://github.com/SantoMarcelo/api-framework/tree/main/java-rest-assured" target="_blank" rel="noopener noreferrer" class="card rounded-2xl p-6 group reveal">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-sky-600">Java · REST Assured</span>
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-sky-600 transition-colors"></i>
+                        </div>
+                        <h3 class="mt-3 text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors" data-i18n="p1_title">API Framework em Java</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed" data-i18n="p1_desc">Framework em Java 21 com REST Assured, JUnit 5 e Allure: contratos validados por JSON Schema em todos os endpoints da API, execução em Docker e pipeline no GitHub Actions que sobe a API de e-commerce Loja QA e roda a suíte contra ela.</p>
+                    </a>
+                    <a href="https://github.com/SantoMarcelo/api-framework/tree/main/typescript-jest" target="_blank" rel="noopener noreferrer" class="card rounded-2xl p-6 group reveal">
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-sky-600">TypeScript · Jest</span>
+                            <i data-lucide="arrow-up-right" class="w-5 h-5 text-slate-500 group-hover:text-sky-600 transition-colors"></i>
+                        </div>
+                        <h3 class="mt-3 text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors" data-i18n="p2_title">API Framework em TypeScript</h3>
+                        <p class="mt-2 text-sm text-slate-600 leading-relaxed" data-i18n="p2_desc">Template reutilizável com TypeScript, Jest, Zod e Axios: validação de contratos com Zod, autenticação multi-etapas (JWT, OAuth2 e TOTP 2FA) feita uma vez por execução, gerador de testes a partir do Swagger e testes de carga com Artillery.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FORMAÇÃO -->
+        <section class="border-t border-slate-200">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 grid md:grid-cols-2 gap-10">
+                <div class="reveal">
+                    <p class="eyebrow" data-i18n="f_edu">Formação Acadêmica</p>
+                    <ul class="mt-4 space-y-4">
+                        <li><p class="font-semibold text-slate-900" data-i18n="f1">Tecnólogo em Gestão de Tecnologia da Informação</p><p class="text-sm text-slate-500">SENAC · 2011 — 2014</p></li>
+                        <li><p class="font-semibold text-slate-900" data-i18n="f2">Técnico em Programação de Computadores</p><p class="text-sm text-slate-500">SENAI - CTAI · 2008 — 2009</p></li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <p class="eyebrow" data-i18n="f_cert">Certificações</p>
+                    <ul class="mt-4 space-y-2 text-sm text-slate-700">
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>RAG Time · Microsoft Developer</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>MCP for Beginners · Microsoft Developer</li>
+                        <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>Ação Estratégica: Inteligência Artificial · vnt/school</li>
+                    </ul>
+                    <details class="mt-3">
+                        <summary class="inline-flex items-center gap-1 text-xs text-sky-600 hover:underline"><span data-i18n="f_more">Ver cursos de automação</span><i data-lucide="chevron-down" class="chev w-3.5 h-3.5 transition-transform"></i></summary>
+                        <ul class="mt-3 space-y-2 text-sm text-slate-700">
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>Testes automatizados com Cypress · Avançado · Udemy</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>Formação devTester</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>Automatizando especificações para Web Apps com Cucumber, Ruby e Capybara</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>Automação do #ZERO com RSpec e Capybara</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>Automação de Testes para APIs REST com JavaScript</li>
+                            <li class="flex gap-2"><i data-lucide="check" class="w-4 h-4 text-emerald-600 mt-0.5 shrink-0"></i>Ruby for testers</li>
+                        </ul>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CONTATO -->
+        <section id="contato" class="border-t border-slate-200 scroll-mt-16">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+                <div class="card rounded-3xl p-8 sm:p-12 text-center reveal">
+                    <p class="eyebrow" data-i18n="nav_contact">Contato</p>
+                    <h2 class="mt-2 text-3xl sm:text-4xl font-bold text-slate-900" data-i18n="ct_title">Vamos conversar sobre qualidade?</h2>
+                    <p class="section-desc mt-4 max-w-3xl mx-auto !text-center" data-i18n="ct_sub">Aberto a posições de liderança em QA e Quality Engineering. Também atendo consultorias pontuais em estratégia de testes e IA aplicada a QA.</p>
+                    <div class="mt-8 flex flex-wrap justify-center gap-3 text-sm">
+                        <a href="mailto:santos.marcelooliveira@outlook.com" class="inline-flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-sky-600 to-emerald-600 text-white font-semibold hover:opacity-90 transition-opacity">
+                            <i data-lucide="mail" class="w-4 h-4"></i><span data-i18n="ct_email">Enviar e-mail</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/marcelo-oliveira-santos" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 border border-slate-300 text-slate-800 hover:border-sky-600 hover:text-sky-600 transition-colors">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i><span>LinkedIn</span>
+                        </a>
+                        <a href="https://wa.me/5548996668585" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 border border-slate-300 text-slate-800 hover:border-sky-600 hover:text-sky-600 transition-colors">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i><span>WhatsApp</span>
+                        </a>
+                        <a href="assets/cv-marcelo-santos.pdf" download class="inline-flex items-center gap-2 px-5 py-3 border border-slate-300 text-slate-800 hover:border-sky-600 hover:text-sky-600 transition-colors">
+                            <i data-lucide="download" class="w-4 h-4"></i><span data-i18n="cv">Baixar CV</span>
+                        </a>
+                    </div>
+                    <p class="mt-6 font-mono text-xs text-slate-500">santos.marcelooliveira@outlook.com</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-slate-200 py-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+            <p>© <span id="current-year"></span> Marcelo de Oliveira Santos. <span data-i18n="foot_rights">Todos os direitos reservados.</span></p>
+            <p data-i18n="foot">Construído com obsessão por <span class="text-emerald-600">Qualidade</span></p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Idiomas (PT/EN): o PT está no HTML; aqui ficam só as traduções em inglês
+        const EN = {
+            nav_about: 'About', nav_impact: 'Impact', nav_exp: 'Experience', nav_lead: 'Leadership', nav_proj: 'Projects', nav_contact: 'Contact',
+            cv: 'Download CV',
+            h_role: 'QA Tech Lead · Quality Engineering &amp; AI applied to QA',
+            h_pitch: 'I turn quality into a competitive advantage: I help teams deliver better software, implement QA practices and use AI to speed up testing and development.',
+            h_sub: '17 years in software quality and 10+ years in test automation (E2E, API and Performance), currently on international projects for a major US-based manufacturer.',
+            h_cta2: 'Get in touch', h_loc: 'Santa Catarina, Brazil', h_langs: 'Portuguese · English · Spanish',
+            pl1_title: '17 years in software quality', pl1_desc: 'Since 2009, from test execution to technical QA leadership.',
+            pl2_title: 'National and international projects', pl2_desc: 'US manufacturing, financial services, agribusiness and telecom, delivering quality aligned with the business.',
+            pl3_title: 'Leading cross-functional teams', pl3_desc: 'Building high-performance teams, leading quality chapters, career growth and mentoring.',
+            pl4_title: 'Robust, modular automation frameworks', pl4_desc: 'E2E, API and performance, with an architecture adopted as the standard in 20+ projects.',
+            c_eyebrow: 'Impact cases', c_title: 'Real problems, measured results.',
+            lbl_p: 'Problem', lbl_a: 'Action', lbl_r: 'Result',
+            c1_tag: 'Test strategy', c1_title: 'Rebalancing the test pyramid',
+            c1_p: 'Over 4,000 E2E tests and fewer than 2,000 unit tests: a slow, brittle suite.',
+            c1_a: 'Moved to 4,000+ unit tests, ~500 E2E and 300+ new API tests.',
+            c1_r: '+20% coverage',
+            c2_title: '7x faster E2E pipelines',
+            c2_p: 'The E2E suite took about 4 hours to give the team feedback.',
+            c2_a: 'Restructured with parallel execution on dedicated pipelines and a fully configured environment.',
+            c3_title: 'API test generator',
+            c3_p: 'No automated API tests; critical bugs were slipping past manual testing.',
+            c3_a: 'Framework that reads the API documentation and generates the test structure, with health check and contract tests (Jest + TypeScript).',
+            c3_r: '400+ tests · 20+ critical bugs',
+            c4_tag: 'AI applied to QA', c4_title: 'AI agents across the QA cycle',
+            c4_p: 'Acceptance criteria, test cases, UAT and scripts took up much of the team\'s time.',
+            c4_a: 'AI skills and agents workflow built from scratch, including an agent that analyzes and fixes pipeline failures.',
+            c4_r: '−80% repetitive work',
+            e_title: 'From test execution to quality leadership.',
+            l_eyebrow: 'Leadership &amp; People', l_title: 'I grow people and scale quality practices.',
+            l_sub: 'I develop people by sharing knowledge and tailoring learning to each person\'s needs. I track professional growth through 1:1s and continuous feedback, and assign progressive responsibilities that prepare each person for the next level of their career.',
+            l1: 'promotions driven among direct reports', l2: 'criteria in the company\'s new QA technical evaluation matrix',
+            l3: 'QAs in a 2-day initiative building AI solutions for their projects', l4: 'analysts in biweekly best-practice and AI sessions',
+            l5: 'API testing trainings with Playwright + TypeScript', l6: 'squads supported by testing standards and quality culture',
+            t90: "Tech stack",
+            t91: "Technologies and practices I use every day.",
+            t104: "Testing Techniques",
+            t105: "BDD, TDD, white/black-box, functional and non-functional",
+            t109: "Modular and scalable",
+            t124: "AI Skills &amp; Agents",
+            t125: "AI applied to QA",
+            t126: "Generative AI",
+            t127: "Scenarios &amp; scripts",
+            t129: "Governance &amp; strategy",
+            t130: "Team Management",
+            t131: "High-performance teams &amp; career growth",
+            t132: "QA Strategy",
+            t133: "Quality aligned with the business at every level",
+            t29: "Invited to manage 2 high-complexity projects, I left the initial project and began leading 5 quality analysts, focusing on automation, test strategy and AI applied to QA.",
+            t30: "Test automation and strategy",
+            t31: "Framework that reads the API documentation and generates the automation structure, with health check and contract tests (Jest + TypeScript): from 0 to <strong class='text-emerald-600 font-bold'>400+ API tests</strong> and <strong class='text-emerald-600 font-bold'>20+ critical bugs</strong> that manual testing had missed.",
+            t32: "Rebalanced the test pyramid: from 4,000+ E2E and &lt;2,000 unit tests to 4,000+ unit and ~500 E2E tests, plus 300+ API tests created. This increased the project's overall coverage by <strong class='text-emerald-600 font-bold'>20%+</strong>.",
+            t33: "Restructured the E2E pipelines with parallel execution on dedicated pipelines and set up the whole environment: execution time from <strong class='text-emerald-600 font-bold'>~4h to ~35min</strong>.",
+            t34: "Implemented a framework for creating API performance test scripts with Artillery, with 100+ scripts.",
+            t35: "AI in the QA workflow",
+            t36: "AI skills and agents workflow rolled out from scratch for day-to-day QA: acceptance criteria, test cases, UAT documentation, front-end and back-end automation scripts and coverage gap analysis. Result: <strong class='text-emerald-600 font-bold'>80% reduction</strong> in time spent on repetitive activities.",
+            t36b: "Pipeline failure analysis agent: identifies the cause, fixes the tests and pushes the fix to the pipeline.",
+            t36c: "Exploratory and guided testing agents, escaped defect analysis, history-based QA estimates and corrective actions for bugs reported by external users.",
+            t37: "Organizational impact · community of ~80 QAs",
+            t38: "Led the rollout of performance testing with JMeter: 150+ scenarios that gave the team confidence during the migration from a legacy system to a new one.",
+            t39: "Delivered 2 API testing trainings, from concepts to implementing automated tests with Playwright + TypeScript.",
+            t40: "Restructured the technical evaluation of all of the company's QA analysts: from <strong class='text-emerald-600 font-bold'>36 to 17 criteria</strong>, with refined descriptions and minimum weights by seniority. Very positive feedback from managers and analysts, praising its clarity.",
+            t41: "Implemented a biweekly meeting for sharing knowledge, best practices and AI, reaching 35+ of the client's quality analysts.",
+            t42: "Led a 2-day initiative in which <strong class='text-emerald-600 font-bold'>36 QA analysts</strong> built AI solutions for day-to-day project work: organized themes, daily follow-up, deliverables and the presentation of results to managers.",
+            t43: "<span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Test strategy</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Test pyramid</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">CI/CD</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Artillery</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">JMeter</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Jest</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Playwright</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">AI applied to QA</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Team management</span>",
+            t26: "Sep 2025 — Present",
+            t27: "Technical QA Lead · 2 high-complexity projects",
+            t47: "Led a team of 4 quality analysts, responsible for implementing quality workflows and processes and for the professional growth of each member.",
+            t48: "Structured the test automation framework: front-end E2E suite with Cypress + TypeScript and API tests in TypeScript with Jest.",
+            t49: "Drove team development: <strong class='text-emerald-600 font-bold'>3 promotions</strong> among direct reports (intern → junior, junior → mid-level, mid-level → senior).",
+            t50: "Presented software demos to stakeholders, in English, at the end of every sprint.",
+            t51: "Across 3 years of leadership, kept the production incident rate close to zero.",
+            t52: "<span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Technical leadership</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Cypress</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">TypeScript</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Jest</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">API testing</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Team management</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">English</span>",
+            t44: "Aug 2022 — Sep 2025",
+            t45: "Technical QA Lead · 1 project",
+            t25: "Working as a Venturus consultant for a major US-based manufacturer, on international manufacturing management projects.",
+            t24: "Aug 2022 — Present",
+            t57: "Built and scaled a QA team from scratch: hiring, onboarding, workflow definition, task management and professional growth through 1:1s.",
+            t58: "Designed a modular automation framework for E2E and REST API, with an architecture that eases migrations, adopted as the standard in 20+ projects.",
+            t59: "Served on the Corporate Quality Committee: quality strategies, QA operating models and RFP processes for vendor selection.",
+            t60: "Rolled out testing standards and quality culture that influenced and supported 60+ squads.",
+            t61: "<span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">E2E</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">REST API</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Frameworks</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">QA governance</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Team management</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">RFP</span>",
+            t55: "Dec 2020 — Aug 2022",
+            t54: "Dec 2020 — Aug 2022",
+            t67: "Worked as Mobile QA, owning the quality of the company's apps from planning through release and production.",
+            t68: "Owned the Performance project: automated scripts, CI/CD-integrated runs and analytical reports to identify bottlenecks.",
+            t69: "With the QA Chapter, implemented automation frameworks for REST APIs and UI, contributing to continuous testing practices in agile squads.",
+            t70: "<span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Mobile QA</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Performance</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">CI/CD</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">REST API</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">QA Chapter</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Agile</span>",
+            t66: "Florianópolis, Brazil",
+            t64: "Oct 2019 — Dec 2020",
+            t63: "Oct 2019 — Dec 2020",
+            t76: "Built and maintained manual and automated test suites (E2E and REST API) for Telecom and VoIP platforms.",
+            t77: "Prepared and managed test environments, including IPBX telephone exchanges and cloud PBX.",
+            t78: "Ran integration tests between desktop software, softphones and physical and virtual IPBX hardware, and collected and analyzed quality metrics.",
+            t79: "<span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">E2E</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">REST API</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">VoIP / Telecom</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">IPBX</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Integration</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">QA metrics</span>",
+            t73: "Feb 2016 — Sep 2019",
+            t72: "Feb 2016 — Sep 2019",
+            t85: "Led testing for desktop CRMs, IPBX dialers and web portals.",
+            t86: "Ran acceptance, regression, stress/performance and white-box testing, and designed test cases and scenarios.",
+            t87: "Prepared test and acceptance (UAT) environments and produced bug reports, defect analysis and execution metrics.",
+            t88: "Was responsible for QA and release testing of internationally distributed software.",
+            t89: "<span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Regression</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Performance</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">White-box</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">UAT</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Test Design</span><span class=\"px-3 py-1.5 border border-slate-200 rounded text-[11px] text-slate-500 font-mono\">Defect Analysis</span>",
+            t84: "Florianópolis, Santa Catarina, Brazil",
+            t82: "Oct 2009 — Jan 2016",
+            t81: "Oct 2009 — Jan 2016",
+            t7: "About Me",
+            t8: "Quality strategy, solid automation and people leadership.",
+            t9a: "As a <strong class='text-slate-900'>QA Tech Lead &amp; SDET</strong>, I work at the intersection of technical excellence, operational efficiency and talent development. I have 17 years of experience in software quality, helping global companies transform and accelerate software delivery through modern Quality Engineering.",
+            t9b: "Specialized in building scalable automation frameworks (Web, REST API and Performance) and in continuous integration in CI/CD pipelines, I implement solutions that cover the entire application lifecycle — from discovery to production.",
+            t9c: "As a leader, I focus on unifying processes across multiple squads, mentoring cross-functional teams and driving innovation with <strong class='text-sky-600'>Generative AI Agents</strong> to eliminate repetitive bottlenecks and deliver real business value.",
+            t17: "Quality aligned with the business",
+            t18: "I align the QA strategy with business goals, with clear and transparent communication across engineering teams, stakeholders and senior management.",
+            t19: "People and mentoring",
+            t20: "Focused on empowering people and developing talent: regular 1:1s, growth paths and objective technical evaluation criteria by seniority.",
+            t21: "Languages",
+            t22: "Native Portuguese, English used every day with a US client, and intermediate Spanish.",
+            p_title: 'Open source, for you to review.',
+            p0_tag: 'Featured project · Full stack + QA', p0_title: 'Loja QA: an e-commerce built to be tested',
+            p0_desc: 'Complete system (Node.js + Express + Prisma and React + Vite) built as a target for automated testing, with a BRD, Gherkin acceptance criteria, test cases, Swagger/OpenAPI, unit and API tests.',
+            p1_title: 'Java API Framework', p1_desc: "Java 21 framework with REST Assured, JUnit 5 and Allure: JSON Schema contract validation for every API endpoint, Docker runner and a GitHub Actions pipeline that starts the Loja QA e-commerce API and runs the suite against it.",
+            p2_title: 'TypeScript API Framework', p2_desc: "Reusable template with TypeScript, Jest, Zod and Axios: Zod contract validation, multi-step authentication (JWT, OAuth2 and TOTP 2FA) done once per run, a Swagger-driven test generator and Artillery load tests.",
+            f_edu: 'Education', f1: 'Associate Degree in Information Technology Management', f2: 'Technical Degree in Computer Programming',
+            f_cert: 'Certifications', f_more: 'Show automation courses',
+            ct_title: 'Let\'s talk about quality?', ct_sub: 'Open to QA and Quality Engineering leadership roles. I also take on focused consulting in test strategy and AI applied to QA.',
+            ct_email: 'Send an email',
+            foot: 'Built with an obsession for <span class="text-emerald-600">Quality</span>', foot_rights: 'All rights reserved.'
+        };
+        const META = {
+            pt: { title: 'Marcelo de Oliveira Santos | QA Tech Lead', menu: 'Abrir menu', group: 'Idioma' },
+            en: { title: 'Marcelo de Oliveira Santos | QA Tech Lead', menu: 'Open menu', group: 'Language' }
+        };
+        const original = new Map();
+        document.querySelectorAll('[data-i18n]').forEach(el => original.set(el, el.innerHTML));
+
+        function renderDurations(lang) {
+            document.querySelectorAll('[data-duration]').forEach(el => {
+                const [sy, sm] = el.dataset.start.split('-').map(Number);
+                const now = new Date();
+                const [ey, em] = el.dataset.end ? el.dataset.end.split('-').map(Number) : [now.getFullYear(), now.getMonth() + 1];
+                const total = (ey - sy) * 12 + (em - sm) + 1;
+                const y = Math.floor(total / 12), m = total % 12;
+                const t = lang === 'en'
+                    ? { y: [' yr', ' yrs'], m: [' mo', ' mos'], and: ' ' }
+                    : { y: [' ano', ' anos'], m: [' mês', ' meses'], and: ' e ' };
+                const parts = [];
+                if (y) parts.push(y + t.y[y === 1 ? 0 : 1]);
+                if (m) parts.push(m + t.m[m === 1 ? 0 : 1]);
+                el.textContent = parts.join(t.and);
+            });
+        }
+
+        function setLang(lang) {
+            document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+            document.title = META[lang].title;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                el.innerHTML = lang === 'en' && EN[key] !== undefined ? EN[key] : original.get(el);
+            });
+            document.getElementById('mobile-menu-btn').setAttribute('aria-label', META[lang].menu);
+            document.querySelector('.lang-btn').parentElement.setAttribute('aria-label', META[lang].group);
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                const on = b.dataset.lang === lang;
+                b.classList.toggle('bg-sky-600', on);
+                b.classList.toggle('text-white', on);
+                b.classList.toggle('text-slate-500', !on);
+            });
+            renderDurations(lang);
+            lucide.createIcons();
+            localStorage.setItem('lang', lang);
+        }
+        document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+        setLang(localStorage.getItem('lang') || 'pt');
+
+        // Mobile menu
+        const mobileMenu = document.getElementById('mobile-menu');
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex');
+        }));
+
+        // Scroll reveal
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    </script>
+</body>
+</html>
